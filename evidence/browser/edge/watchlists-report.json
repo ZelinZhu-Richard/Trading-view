@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-12T02:30:20.690Z",
+  "browser": "155.0.4283.45",
+  "status": "passed",
+  "results": [
+    "List creation, addition, section assignment/rename, CSV import, unavailable identities, filter, sorting and save/reload passed; 5 rendered rows for 1,201 instruments.",
+    "CSV export preserved all identities and assigned sections."
+  ],
+  "pageErrors": []
+}

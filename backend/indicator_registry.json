@@ -1,0 +1,1770 @@
+{
+  "version": "1.0.0",
+  "indicators": [
+    {
+      "id": "sma",
+      "name": "Simple moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 9,
+          "source": "close"
+        },
+        "validation": "Lengths are integers >=1; sources use the common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "SMA_n(x)[t] = sum(x[t-n+1:t+1])/n.",
+      "warmup": "First output index n-1 (default8); require n valid consecutive bars.",
+      "edge_cases": "Constant input returns the constant; no partial-window output.",
+      "source_ids": [
+        "sma"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000696841-simple-moving-average/"
+      ],
+      "unsettled_or_app_choices": [
+        "9/close documented; strict missing-window policy is an app choice."
+      ],
+      "verification_cases": [
+        "n3 on[1,2,3,4] -> [null,null,2,3]."
+      ]
+    },
+    {
+      "id": "ema",
+      "name": "Exponential moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 9,
+          "source": "close",
+          "seed": "sma"
+        },
+        "validation": "Lengths are integers >=1; sources use the common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "alpha=2/(n+1); seed at t=n-1 with SMA_n; thereafter y[t]=alpha*x[t]+(1-alpha)*y[t-1].",
+      "warmup": "First output n-1 (default8). Seed is a published output.",
+      "edge_cases": "On explicit missing source reset and seed again; do not use adjust=True normalized finite-history EWMA.",
+      "source_ids": [
+        "ma"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502589-moving-averages/"
+      ],
+      "unsettled_or_app_choices": [
+        "9/close follow general MA help. Exact seed-bar indexing is proposed; no Pine numerical equivalence established."
+      ],
+      "verification_cases": [
+        "n3 on[1,2,3,4] -> [null,null,2,3]; contrast first-price seeded EMA."
+      ]
+    },
+    {
+      "id": "wma",
+      "name": "Weighted moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 9,
+          "source": "close"
+        },
+        "validation": "Lengths are integers >=1; sources use the common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "Weights1..n on oldest..newest; weighted sum divided by n*(n+1)/2.",
+      "warmup": "First output n-1 (default8).",
+      "edge_cases": "Length1 equals source.",
+      "source_ids": [
+        "ma"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502589-moving-averages/"
+      ],
+      "unsettled_or_app_choices": [
+        "Length9/close adopted from general MA defaults, not separately verified standalone WMA defaults."
+      ],
+      "verification_cases": [
+        "n3 on[1,2,3] ->14/6; n1 identity."
+      ]
+    },
+    {
+      "id": "vwma",
+      "name": "Volume-weighted moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 20,
+          "source": "close"
+        },
+        "validation": "Lengths are integers >=1; sources use the common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "sum_n(x*V)/sum_n(V).",
+      "warmup": "First output n-1 (default19), provided total volume>0.",
+      "edge_cases": "Zero total volume gives null; zero-volume bars contribute zero; missing/meaningless volume disables calculation.",
+      "source_ids": [
+        "vwma",
+        "ratings"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000592293-volume-weighted-moving-average-vwma/",
+        "https://www.tradingview.com/support/solutions/43000614331-technical-ratings/"
+      ],
+      "unsettled_or_app_choices": [
+        "Length20 selected from Technical Ratings configuration, not asserted standalone default."
+      ],
+      "verification_cases": [
+        "n2 x[10,20],V[1,3] ->17.5; all-zero V ->null."
+      ]
+    },
+    {
+      "id": "dema",
+      "name": "Double exponential moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 9,
+          "source": "close",
+          "seed": "sma"
+        },
+        "validation": "Lengths are integers >=1; sources use the common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "E1=EMA_n(x); E2=EMA_n(E1); DEMA=2*E1-E2.",
+      "warmup": "First output 2*(n-1) (default16), because each EMA seeds from n valid inputs.",
+      "edge_cases": "Can overshoot price; do not clamp to window range.",
+      "source_ids": [
+        "ma"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502589-moving-averages/"
+      ],
+      "unsettled_or_app_choices": [
+        "Length9 and cascaded SMA seeds are app choices; formula does not fix seeds."
+      ],
+      "verification_cases": [
+        "n3: no published output until index4; hand-check cascaded SMA seeds."
+      ]
+    },
+    {
+      "id": "tema",
+      "name": "Triple exponential moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 9,
+          "source": "close",
+          "seed": "sma"
+        },
+        "validation": "Lengths are integers >=1; sources use the common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "E1=EMA_n(x); E2=EMA_n(E1); E3=EMA_n(E2); TEMA=3*E1-3*E2+E3.",
+      "warmup": "First output 3*(n-1) (default24).",
+      "edge_cases": "Can overshoot; preserve precision between cascades.",
+      "source_ids": [
+        "ma"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502589-moving-averages/"
+      ],
+      "unsettled_or_app_choices": [
+        "Length9 and cascaded SMA seeds are app choices."
+      ],
+      "verification_cases": [
+        "n3: no published output until index6; distinguish triple smoothing from TEMA combination."
+      ]
+    },
+    {
+      "id": "hma",
+      "name": "Hull moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 9,
+          "source": "close",
+          "rounding": "floor"
+        },
+        "validation": "Lengths are integers >=1; sources use the common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "h=max(1,floor(n/2)); r=max(1,floor(sqrt(n))); HMA=WMA_r(2*WMA_h(x)-WMA_n(x)).",
+      "warmup": "First output n+r-2 (default10).",
+      "edge_cases": "Clamp derived lengths to1, so n1 is identity.",
+      "source_ids": [
+        "hma",
+        "hull_author",
+        "ratings"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000589149-hull-moving-average/",
+        "https://alanhull.com/the-hull-moving-average/",
+        "https://www.tradingview.com/support/solutions/43000614331-technical-ratings/"
+      ],
+      "unsettled_or_app_choices": [
+        "Floor chosen for positive integer conversion; TradingView support does not define rounding. Length9 selected from ratings."
+      ],
+      "verification_cases": [
+        "Odd n7 uses h3,r2; n1 identity; ramp exposes rounding variants."
+      ]
+    },
+    {
+      "id": "kama",
+      "name": "Kaufman adaptive moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 10,
+          "fast": 2,
+          "slow": 30,
+          "source": "close",
+          "seed": "previous_source"
+        },
+        "validation": "Integers length>=1 and 1<=fast<=slow; finite source."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "ER=abs(x[t]-x[t-n])/sum_{j=t-n+1..t}abs(x[j]-x[j-1]); a=(ER*(2/(fast+1)-2/(slow+1))+2/(slow+1))^2; y[t]=y[t-1]+a*(x[t]-y[t-1]).",
+      "warmup": "Need n changes (n+1 bars). At first t=n set previous y=x[n-1], then update. First output default10.",
+      "edge_cases": "If volatility sum=0, choose ER=0. Preserve constant source; reset on explicit missing input.",
+      "source_ids": [
+        "kama",
+        "lean_kama"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000773012-kaufman-s-adaptive-moving-average-kama/",
+        "https://raw.githubusercontent.com/QuantConnect/Lean/master/Indicators/KaufmanAdaptiveMovingAverage.cs"
+      ],
+      "unsettled_or_app_choices": [
+        "Length10, close, first valid index and previous-price seed are app choices; LEAN demonstrates a previous-price variant but its readiness semantics are not adopted.",
+        "TradingView article does not establish seed or zero-volatility result."
+      ],
+      "verification_cases": [
+        "Constant series remains constant using ER0; monotonic ER1; reversal lowers ER; first output at n."
+      ]
+    },
+    {
+      "id": "alma",
+      "name": "Arnaud Legoux moving average",
+      "category": "moving_average",
+      "parameters": {
+        "defaults": {
+          "length": 9,
+          "offset": 0.85,
+          "sigma": 6,
+          "source": "close",
+          "floor_center": false
+        },
+        "validation": "length integer>=1; offset in[0,1]; finite sigma>0; floor_center boolean."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "For i=0..n-1 oldest..newest, m=offset*(n-1), optionally floor(m); s=n/sigma; w_i=exp(-(i-m)^2/(2*s^2)); ALMA=sum(w_i*x[t-n+1+i])/sum(w_i).",
+      "warmup": "First output n-1 (default8).",
+      "edge_cases": "n1 is identity. Use normalized/stable Gaussian weights if sigma is extreme; reject nonfinite weight sum.",
+      "source_ids": [
+        "alma",
+        "lean_alma"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000594683-arnaud-legoux-moving-average/",
+        "https://raw.githubusercontent.com/QuantConnect/Lean/master/Indicators/ArnaudLegouxMovingAverage.cs"
+      ],
+      "unsettled_or_app_choices": [
+        "9/.85/6 documented. floor_center=false is an explicit app variant; LEAN uses true. Neither proves TradingView numerical behavior.",
+        "Use a trailing causal weighted sum; do not infer a future-looking two-pass filter from informal help prose."
+      ],
+      "verification_cases": [
+        "n3 offset.5 symmetric weights preserve symmetric midpoint; floor_center true/false differ at n9,.85; no future suffix affects prefix."
+      ]
+    },
+    {
+      "id": "bollinger_bands",
+      "name": "Bollinger Bands",
+      "category": "overlay",
+      "parameters": {
+        "defaults": {
+          "length": 20,
+          "multiplier": 2,
+          "source": "close",
+          "basis": "sma",
+          "ddof": 0
+        },
+        "validation": "length integer>=1 and length>ddof; multiplier finite>=0; ddof in{0,1}; basis=sma initially."
+      },
+      "outputs": [
+        {
+          "id": "basis",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "upper",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "lower",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "basis=SMA_n(x); sigma=sqrt(sum_n((x-basis)^2)/(n-ddof)); upper/lower=basis +/- multiplier*sigma.",
+      "warmup": "First output n-1 (default19).",
+      "edge_cases": "Flat source gives coincident bands. Display rounding never feeds back.",
+      "source_ids": [
+        "bb",
+        "stddev"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000501840-bollinger-bands-bb/",
+        "https://raw.githubusercontent.com/QuantConnect/Lean/master/Indicators/StandardDeviation.cs"
+      ],
+      "unsettled_or_app_choices": [
+        "20/2/close documented; ddof0 is the explicit app population convention. Other basis choices require separate seed handling."
+      ],
+      "verification_cases": [
+        "n3 x[1,2,3]: basis2,sigma=sqrt(2/3); sample convention gives1 instead."
+      ]
+    },
+    {
+      "id": "keltner_channels",
+      "name": "Keltner Channels",
+      "category": "overlay",
+      "parameters": {
+        "defaults": {
+          "length": 20,
+          "atr_length": 10,
+          "multiplier": 2,
+          "source": "close",
+          "basis": "ema",
+          "range_smoothing": "rma"
+        },
+        "validation": "lengths integer>=1; multiplier finite>=0."
+      },
+      "outputs": [
+        {
+          "id": "basis",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "upper",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "lower",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "basis=EMA_length(x); range=RMA_atr_length(TR); upper/lower=basis +/- multiplier*range.",
+      "warmup": "First output max(length,atr_length)-1 (default19).",
+      "edge_cases": "TR uses H-L on dataset first bar. Both basis/range must be ready.",
+      "source_ids": [
+        "kc",
+        "atr"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502266-keltner-channels-kc/",
+        "https://www.tradingview.com/support/solutions/43000501823-average-true-range-atr/"
+      ],
+      "unsettled_or_app_choices": [
+        "App selects modern EMA+Wilder ATR variant, length20/ATR10/factor2. ATR10 and seeds are choices.",
+        "Pine ta.kc can use EMA of a range series; do not treat it as a numerical oracle for this variant."
+      ],
+      "verification_cases": [
+        "Gap-up bar increases ATR even when high-low unchanged; basis and ATR seeds have independent lengths."
+      ]
+    },
+    {
+      "id": "donchian_channels",
+      "name": "Donchian Channels",
+      "category": "overlay",
+      "parameters": {
+        "defaults": {
+          "length": 20,
+          "include_current": true
+        },
+        "validation": "Lengths are integers >=1; sources use the common source enum."
+      },
+      "outputs": [
+        {
+          "id": "upper",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "middle",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "lower",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "upper=HH_n; lower=LL_n; middle=(upper+lower)/2, using current completed bar in the window.",
+      "warmup": "First output n-1 (default19).",
+      "edge_cases": "Current-inclusive channel cannot be used as a prior channel for breakout without explicitly lagging it.",
+      "source_ids": [
+        "dc"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502253-donchian-channels-dc/"
+      ],
+      "unsettled_or_app_choices": [
+        "20 documented; current inclusion is explicit app contract, no hidden one-bar shift."
+      ],
+      "verification_cases": [
+        "Current new high expands same-bar channel; prior channel comparison uses lagged value."
+      ]
+    },
+    {
+      "id": "ichimoku",
+      "name": "Ichimoku cloud",
+      "category": "overlay",
+      "parameters": {
+        "defaults": {
+          "conversion": 9,
+          "base": 26,
+          "span_b": 52,
+          "displacement": 26
+        },
+        "validation": "lengths integer>=1; displacement integer>=0."
+      },
+      "outputs": [
+        {
+          "id": "conversion",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "base",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "leading_a",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 26
+        },
+        {
+          "id": "leading_b",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 26
+        },
+        {
+          "id": "lagging_close",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": -26
+        }
+      ],
+      "formula": "mid_n=(HH_n+LL_n)/2; conversion=mid_conversion; base=mid_base; leading_a=(conversion+base)/2; leading_b=mid_span_b; lagging_close=C. Compute all at t; only the renderer moves positions.",
+      "warmup": "Source output indices: conversion8, base25, leading_a25, leading_b51, lagging_close0 at defaults. Display shifts do not shorten availability.",
+      "edge_cases": "Store computed_at/available_at separately from plot_at; a close calculated at t remains unavailable at t-26. Extend display slots without inventing future OHLC.",
+      "source_ids": [
+        "ichimoku",
+        "ratings",
+        "plots"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000589152-ichimoku-cloud/",
+        "https://www.tradingview.com/support/solutions/43000614331-technical-ratings/",
+        "https://www.tradingview.com/pine-script-docs/visuals/plots/"
+      ],
+      "unsettled_or_app_choices": [
+        "9/26/52 supported by ratings; exactly +/-26 bars chosen from support prose. A displacement-minus-one convention was not verified and must not be silently substituted.",
+        "Backtests consume source-time values. Comparing price with the cloud currently drawn at t requires the already-known spans calculated t-displacement."
+      ],
+      "verification_cases": [
+        "Append future bars: source-time outputs already available never change; lagging-close plot at old slot remains unavailable before computed_at.",
+        "Default leadingB first computes at51 and plots77."
+      ]
+    },
+    {
+      "id": "supertrend",
+      "name": "Supertrend",
+      "category": "overlay",
+      "parameters": {
+        "defaults": {
+          "atr_length": 10,
+          "factor": 3,
+          "smoothing": "rma"
+        },
+        "validation": "atr_length integer>=1; factor finite>0."
+      },
+      "outputs": [
+        {
+          "id": "line",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "direction",
+          "pane": "none",
+          "units": "sign",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": [
+        "basicU=HL2+factor*ATR; basicL=HL2-factor*ATR. At first ATR-ready bar set U=basicU,L=basicL,direction=-1,line=U.",
+        "Later U=basicU if basicU<prevU or prevC>prevU else prevU; L=basicL if basicL>prevL or prevC<prevL else prevL.",
+        "If previous direction=-1, switch to +1 only if C>U; if previous direction=+1, switch to -1 only if C<L. Line=L when +1, otherwise U."
+      ],
+      "warmup": "First output atr_length-1 (default9); prior values null.",
+      "edge_cases": "Strict crossing: equality does not reverse; direction is app sign +1=up,-1=down.",
+      "source_ids": [
+        "supertrend",
+        "atr"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000634738-supertrend/",
+        "https://www.tradingview.com/support/solutions/43000501823-average-true-range-atr/"
+      ],
+      "unsettled_or_app_choices": [
+        "10/3 and initial ready-band seed are proposed defaults. Direction sign may differ from Pine output; map signs rather than assume.",
+        "Use close-only confirmed-bar flips; intrabar preview is provisional."
+      ],
+      "verification_cases": [
+        "Equality with active band does not flip; cross each direction; verify carried bands when previous close crosses prior band."
+      ]
+    },
+    {
+      "id": "parabolic_sar",
+      "name": "Parabolic SAR",
+      "category": "overlay",
+      "parameters": {
+        "defaults": {
+          "start": 0.02,
+          "increment": 0.02,
+          "maximum": 0.2
+        },
+        "validation": "0<start<=maximum; increment>0; all finite."
+      },
+      "outputs": [
+        {
+          "id": "sar",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "direction",
+          "pane": "none",
+          "units": "sign",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": [
+        "First bar null. At t=1 choose up if C1>C0 else down; initialize SAR=L0 if up else H0; EP=H1 if up else L1; AF=start.",
+        "For t>=2: candidate=prevSAR+prevAF*(prevEP-prevSAR). If up and L<candidate, reverse down: SAR=prevEP,EP=L,AF=start. If down and H>candidate, reverse up: SAR=prevEP,EP=H,AF=start.",
+        "Without reversal, up SAR=min(candidate,L[t-1],L[t-2]); down SAR=max(candidate,H[t-1],H[t-2]). If new directional extreme, update EP and AF=min(maximum,prevAF+increment); otherwise retain them."
+      ],
+      "warmup": "First output index1 (two valid bars).",
+      "edge_cases": "Equal-close initialization chooses down; equality at SAR does not reverse. Reversal uses previous EP; no same-bar second reversal.",
+      "source_ids": [
+        "sar"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502597-parabolic-sar-sar/"
+      ],
+      "unsettled_or_app_choices": [
+        "Default AF values documented. Equality, EP initialization and exact reversal-before-clamp order are explicit proposed choices requiring fixtures; do not claim agreement for outside bars.",
+        "Other implementations clamp against current extreme on reversal and can differ."
+      ],
+      "verification_cases": [
+        "Two-bar initialization and equal-close tie; increasing extrema AF cap; reversal/large outside bar; prior-two-bar clamp."
+      ]
+    },
+    {
+      "id": "pivot_points",
+      "name": "Standard pivot points (Traditional)",
+      "category": "overlay",
+      "parameters": {
+        "defaults": {
+          "method": "traditional",
+          "period": "session",
+          "levels": 3,
+          "session_mode": "instrument_regular"
+        },
+        "validation": "method=traditional in this contract; period in{session,week,month}; levels=3; session calendar required."
+      },
+      "outputs": [
+        {
+          "id": "p",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "r1",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "s1",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "r2",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "s2",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "r3",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "s3",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": [
+        "Using previous COMPLETED pivot period H,L,C: P=(H+L+C)/3; R1=2P-L; S1=2P-H; R2=P+(H-L); S2=P-(H-L); R3=2P+H-2L; S3=2P-2H+L.",
+        "Hold levels constant throughout the following period; no use of current period H/L/C."
+      ],
+      "warmup": "First full prior period must exist; null in first dataset period if its predecessor is unavailable/incomplete.",
+      "edge_cases": "Calendar/session boundary uses instrument timezone and configured regular/extended session; never group blindly by UTC date. Incomplete prior period returns null; daily settlement is not substituted for a bar close.",
+      "source_ids": [
+        "pivots",
+        "sessions"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000521824-pivot-points-standard/",
+        "https://www.tradingview.com/pine-script-docs/concepts/sessions/"
+      ],
+      "unsettled_or_app_choices": [
+        "App chooses Traditional, daily session, three support/resistance levels. TradingView Standard also supports Classic/Fibonacci/Woodie/DM/Camarilla and additional levels; these are distinct formulas, not aliases.",
+        "No Auto timeframe mapping. Provider daily bars vs intraday aggregates and settlement closes must be declared."
+      ],
+      "verification_cases": [
+        "Prior H=110,L=90,C=100 -> P=100,R1=110,S1=90,R2=120,S2=80,R3=130,S3=70; current-session new high cannot alter levels.",
+        "DST/overnight/holiday sessions; reject incomplete prior session."
+      ]
+    },
+    {
+      "id": "rsi",
+      "name": "Relative strength index",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "length": 14,
+          "source": "close",
+          "smoothing": "rma"
+        },
+        "validation": "Lengths are integers >=1; source uses common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "rsi",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "delta=x[t]-x[t-1]; G=RMA_n(max(delta,0)); D=RMA_n(max(-delta,0)); RSI=100*G/(G+D).",
+      "warmup": "First output index n (default14): n price changes and an SMA seed of each gain/loss series.",
+      "edge_cases": "If G+D=0 return null; if D=0<G return100; if G=0<D return0.",
+      "source_ids": [
+        "rsi",
+        "adx"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502338-relative-strength-index-rsi/",
+        "https://www.tradingview.com/support/solutions/43000589099-average-directional-index-adx/"
+      ],
+      "unsettled_or_app_choices": [
+        "14/close and RMA documented; exact SMA seed alignment and flat-series null are proposed. Some platforms choose50 or100 for flat data."
+      ],
+      "verification_cases": [
+        "Strictly rising n changes ->100; falling ->0; unchanged ->null; initial seed excludes absent first delta."
+      ]
+    },
+    {
+      "id": "stochastic",
+      "name": "Stochastic",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "length": 14,
+          "k_smoothing": 3,
+          "d_smoothing": 3
+        },
+        "validation": "Lengths are integers >=1; source uses common source enum."
+      },
+      "outputs": [
+        {
+          "id": "k",
+          "pane": "stochastic",
+          "units": "percent",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "d",
+          "pane": "stochastic",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "raw=100*(C-LL_n)/(HH_n-LL_n); K=SMA_k(raw); D=SMA_d(K).",
+      "warmup": "Raw index n-1; K n+k-2 (default15); D n+k+d-3 (default17).",
+      "edge_cases": "HH=LL gives null raw; downstream strict SMA windows restart readiness after null.",
+      "source_ids": [
+        "stochastic"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502332-stochastic-stoch/"
+      ],
+      "unsettled_or_app_choices": [
+        "14/3/3 and SMA documented; flat-range null and strict windows are app choices."
+      ],
+      "verification_cases": [
+        "C at rolling low ->0, high ->100 before smoothing; zero range null; K/D warmups15/17 for defaults."
+      ]
+    },
+    {
+      "id": "stochastic_rsi",
+      "name": "Stochastic RSI",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "rsi_length": 14,
+          "stochastic_length": 14,
+          "k_smoothing": 3,
+          "d_smoothing": 3,
+          "source": "close",
+          "scale": 100
+        },
+        "validation": "Lengths are integers >=1; source uses common source enum."
+      },
+      "outputs": [
+        {
+          "id": "k",
+          "pane": "stochastic_rsi",
+          "units": "percent",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "d",
+          "pane": "stochastic_rsi",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "R=RSI_r(x); raw=scale*(R-LL_s(R))/(HH_s(R)-LL_s(R)); K=SMA_k(raw); D=SMA_d(K).",
+      "warmup": "Raw index r+s-1; K r+s+k-2 (default29); D r+s+k+d-3 (default31). All windows require valid RSI.",
+      "edge_cases": "Zero RSI range gives null; no epsilon denominator or arbitrary midline.",
+      "source_ids": [
+        "stoch_rsi",
+        "ratings",
+        "stochastic"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502333-stochastic-rsi-stoch-rsi/",
+        "https://www.tradingview.com/support/solutions/43000614331-technical-ratings/",
+        "https://www.tradingview.com/support/solutions/43000502332-stochastic-stoch/"
+      ],
+      "unsettled_or_app_choices": [
+        "K/D3 supported, 14/14 adopted from ratings. Percent scale100 is explicit; support explains the unscaled0..1 ratio."
+      ],
+      "verification_cases": [
+        "Constant valid RSI window ->null; verify scale100 and combined warmup29/31."
+      ]
+    },
+    {
+      "id": "macd",
+      "name": "Moving average convergence/divergence",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "fast": 12,
+          "slow": 26,
+          "signal": 9,
+          "source": "close",
+          "oscillator_ma": "ema",
+          "signal_ma": "ema",
+          "seed": "sma"
+        },
+        "validation": "1<=fast<slow integer; signal integer>=1; source finite."
+      },
+      "outputs": [
+        {
+          "id": "macd",
+          "pane": "macd",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "signal",
+          "pane": "macd",
+          "units": "price",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "histogram",
+          "pane": "macd",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "M=EMA_fast(x)-EMA_slow(x); signal=EMA_signal(M); histogram=M-signal.",
+      "warmup": "MACD index slow-1 (default25); signal/histogram slow+signal-2 (default33).",
+      "edge_cases": "Do not fill leading null MACD with0 before signal smoothing.",
+      "source_ids": [
+        "macd",
+        "ratings"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502344-moving-average-convergence-divergence-macd-indicator/",
+        "https://www.tradingview.com/support/solutions/43000614331-technical-ratings/"
+      ],
+      "unsettled_or_app_choices": [
+        "12/26/9 adopted from ratings; EMA/EMA and SMA seeds are app settings. Support permits SMA variants, which need distinct labels."
+      ],
+      "verification_cases": [
+        "Constant positive source ->0 once ready; signal withheld until33; never seed signal from leading zeros."
+      ]
+    },
+    {
+      "id": "cci",
+      "name": "Commodity channel index",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "length": 20,
+          "source": "hlc3",
+          "constant": 0.015
+        },
+        "validation": "length integer>=1; constant finite>0; source uses common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "cci",
+          "units": "index",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "mu=SMA_n(x); MAD=sum_{i=t-n+1..t}abs(x[i]-mu[t])/n; CCI=(x[t]-mu)/(constant*MAD).",
+      "warmup": "First output n-1 (default19).",
+      "edge_cases": "MAD0 gives null. Compute deviations against current window mean, not a time series of historical means.",
+      "source_ids": [
+        "cci"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502001-commodity-channel-index-cci/"
+      ],
+      "unsettled_or_app_choices": [
+        "20 and .015 supported; HLC3 follows worked formula although same page's input prose says close default. Source must be exposed."
+      ],
+      "verification_cases": [
+        "n3 x[1,2,3]: mean2,MAD2/3,CCI100; constant ->null."
+      ]
+    },
+    {
+      "id": "roc",
+      "name": "Rate of change",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "length": 9,
+          "source": "close",
+          "scale": 100
+        },
+        "validation": "Lengths are integers >=1; source uses common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "roc",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "ROC=100*(x[t]-x[t-n])/x[t-n].",
+      "warmup": "First output n (default9), requiring n+1 bars.",
+      "edge_cases": "Prior source0 gives null. Negative nonzero prices are permitted algebraically, but percent interpretation should retain source context.",
+      "source_ids": [
+        "roc"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502343-rate-of-change-roc/"
+      ],
+      "unsettled_or_app_choices": [
+        "9/close documented; explicit zero-denominator null is an app choice."
+      ],
+      "verification_cases": [
+        "n1 x[10,11] ->10%; prior0 ->null."
+      ]
+    },
+    {
+      "id": "momentum",
+      "name": "Momentum",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "length": 10,
+          "source": "close"
+        },
+        "validation": "Lengths are integers >=1; source uses common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "momentum",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "Momentum=x[t]-x[t-n].",
+      "warmup": "First output n (default10), requiring n+1 bars.",
+      "edge_cases": "Zero/negative source is valid; flat source gives0.",
+      "source_ids": [
+        "lean_momentum",
+        "ratings"
+      ],
+      "source_urls": [
+        "https://raw.githubusercontent.com/QuantConnect/Lean/master/Indicators/Momentum.cs",
+        "https://www.tradingview.com/support/solutions/43000614331-technical-ratings/"
+      ],
+      "unsettled_or_app_choices": [
+        "Length10 adopted from TradingView ratings; formula verified against independent LEAN platform, no TV numerical oracle."
+      ],
+      "verification_cases": [
+        "n2 x[1,4,9] ->8; n2 requires3 bars."
+      ]
+    },
+    {
+      "id": "williams_r",
+      "name": "Williams %R",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "length": 14
+        },
+        "validation": "Lengths are integers >=1; source uses common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "williams_r",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "W%R=-100*(HH_n-C)/(HH_n-LL_n).",
+      "warmup": "First output n-1 (default13).",
+      "edge_cases": "Zero high-low range gives null; with valid OHLC and nonzero range values are[-100,0].",
+      "source_ids": [
+        "williams",
+        "ratings"
+      ],
+      "source_urls": [
+        "https://www.metatrader5.com/en/terminal/help/indicators/oscillators/wpr",
+        "https://www.tradingview.com/support/solutions/43000614331-technical-ratings/"
+      ],
+      "unsettled_or_app_choices": [
+        "14 adopted from TV ratings. Formula primary source is MetaTrader; current-inclusive window and zero-range null are explicit choices."
+      ],
+      "verification_cases": [
+        "Close at high ->0, at low ->-100; flat span null."
+      ]
+    },
+    {
+      "id": "trix",
+      "name": "TRIX",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "length": 18,
+          "signal_length": 9,
+          "source": "close",
+          "seed": "sma"
+        },
+        "validation": "Lengths are integers >=1; source uses common source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "trix",
+          "units": "percent",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "signal",
+          "pane": "trix",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "E1=EMA_n(x); E2=EMA_n(E1); E3=EMA_n(E2); TRIX=100*(E3[t]-E3[t-1])/E3[t-1]; signal=EMA_signal_length(TRIX).",
+      "warmup": "TRIX index3*(n-1)+1 (default52); signal adds signal_length-1 (default60).",
+      "edge_cases": "Prior E3=0 gives null, including all-zero source. Flat nonzero source gives0 after readiness.",
+      "source_ids": [
+        "trix"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502331-trix/"
+      ],
+      "unsettled_or_app_choices": [
+        "Length18 documented; optional signal9 and cascaded seeds chosen by app. TRIX is rate of triple EMA, not TEMA."
+      ],
+      "verification_cases": [
+        "Constant nonzero source ->0; n3 TRIX firstindex7; all-zero denominator null."
+      ]
+    },
+    {
+      "id": "ultimate_oscillator",
+      "name": "Ultimate oscillator",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "short": 7,
+          "medium": 14,
+          "long": 28,
+          "weights": [
+            4,
+            2,
+            1
+          ]
+        },
+        "validation": "Integers1<=short<medium<long; weights fixed[4,2,1]."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "ultimate_oscillator",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "BP=C-min(L,prevC); TR=max(H,prevC)-min(L,prevC); A_n=sum_n(BP)/sum_n(TR); UO=100*(4*A_short+2*A_medium+A_long)/7.",
+      "warmup": "Previous close required. First output index long (default28).",
+      "edge_cases": "Any component TR sum0 gives null entire UO; no synthetic previous close on first bar.",
+      "source_ids": [
+        "uo"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502328-ultimate-oscillator-uo/"
+      ],
+      "unsettled_or_app_choices": [
+        "7/14/28 and4/2/1 documented; first-bar and zero-ratio handling proposed."
+      ],
+      "verification_cases": [
+        "Test three distinct rolling ratios and weights4/2/1; flat zero TR window ->null."
+      ]
+    },
+    {
+      "id": "awesome_oscillator",
+      "name": "Awesome oscillator",
+      "category": "momentum",
+      "parameters": {
+        "defaults": {
+          "fast": 5,
+          "slow": 34,
+          "source": "hl2"
+        },
+        "validation": "1<=fast<slow integer; source=hl2."
+      },
+      "outputs": [
+        {
+          "id": "histogram",
+          "pane": "awesome_oscillator",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "AO=SMA_fast(HL2)-SMA_slow(HL2).",
+      "warmup": "First output slow-1 (default33).",
+      "edge_cases": "Constant HL2 gives0. Color rising/falling against previous AO, not sign; equality uses neutral app color.",
+      "source_ids": [
+        "ao"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000501826-awesome-oscillator-ao/"
+      ],
+      "unsettled_or_app_choices": [
+        "5/34 and HL2 documented; tie color is app presentation choice."
+      ],
+      "verification_cases": [
+        "Constant HL2 ->0; test hl2 differs from close; first output33."
+      ]
+    },
+    {
+      "id": "atr",
+      "name": "Average true range",
+      "category": "volatility_strength",
+      "parameters": {
+        "defaults": {
+          "length": 14,
+          "smoothing": "rma"
+        },
+        "validation": "Length is integer>=1."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "atr",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "TR=max(H-L,abs(H-prevC),abs(L-prevC)); if no prior close at dataset start use H-L; ATR=RMA_n(TR).",
+      "warmup": "First output n-1 (default13), seeded with mean of first n TR values.",
+      "edge_cases": "No movement gives0. A gap from valid previous close enters TR; missing OHLC is not treated as a normal trading gap.",
+      "source_ids": [
+        "atr",
+        "atr_code"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000501823-average-true-range-atr/",
+        "https://www.tradingview.com/support/solutions/43000734653-how-are-adr-and-atr-calculated/"
+      ],
+      "unsettled_or_app_choices": [
+        "14/RMA supported; exact first seed indexing follows app common convention."
+      ],
+      "verification_cases": [
+        "First TR=H-L; gap includes abs distance to previous close; n3 SMA seed then alpha1/3."
+      ]
+    },
+    {
+      "id": "adx_dmi",
+      "name": "ADX / Directional movement",
+      "category": "volatility_strength",
+      "parameters": {
+        "defaults": {
+          "di_length": 14,
+          "adx_length": 14,
+          "smoothing": "rma"
+        },
+        "validation": "Length is integer>=1."
+      },
+      "outputs": [
+        {
+          "id": "plus_di",
+          "pane": "adx_dmi",
+          "units": "percent",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "minus_di",
+          "pane": "adx_dmi",
+          "units": "percent",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "adx",
+          "pane": "adx_dmi",
+          "units": "index",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": [
+        "Up=H-prevH; Down=prevL-L; plusDM=Up if Up>Down and Up>0 else0; minusDM=Down if Down>Up and Down>0 else0.",
+        "Starting with transitions t>=1, smooth plusDM,minusDM,TR independently by RMA_di_length. plusDI=100*smoothPlus/smoothTR; minusDI=100*smoothMinus/smoothTR.",
+        "DX=100*abs(plusDI-minusDI)/(plusDI+minusDI); ADX=RMA_adx_length(DX)."
+      ],
+      "warmup": "DI first index di_length (default14); ADX first index di_length+adx_length-1 (default27). Exclude t0 TR from these aligned transition seeds.",
+      "edge_cases": "If smoothTR=0 choose both DI=0; if DI sum=0 choose DX=0. Tied directional moves give both DM0.",
+      "source_ids": [
+        "dmi",
+        "adx"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502250-directional-movement-dmi/",
+        "https://www.tradingview.com/support/solutions/43000589099-average-directional-index-adx/"
+      ],
+      "unsettled_or_app_choices": [
+        "14/14 supported. ADX help supports Wilder recurrence; DMI help uses ambiguous EMA prose. App selects Wilder throughout, not ordinary EMA.",
+        "Seed alignment and no-movement0 exceptions are explicit app choices."
+      ],
+      "verification_cases": [
+        "UpMove=DownMove>0 -> bothDM0; all-flat ->DI0,DX0,ADX0 after seeds; ADX first27."
+      ]
+    },
+    {
+      "id": "aroon",
+      "name": "Aroon",
+      "category": "volatility_strength",
+      "parameters": {
+        "defaults": {
+          "length": 14,
+          "tie": "most_recent",
+          "window_extra": 1
+        },
+        "validation": "Length is integer>=1."
+      },
+      "outputs": [
+        {
+          "id": "up",
+          "pane": "aroon",
+          "units": "percent",
+          "plot_offset_bars": 0
+        },
+        {
+          "id": "down",
+          "pane": "aroon",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "Across n+1 bars including current, find ages of maximum H and minimum L (0=current,n=oldest); up=100*(n-ageHigh)/n; down=100*(n-ageLow)/n.",
+      "warmup": "First output n (default14).",
+      "edge_cases": "Equal extreme values choose most recent occurrence; completely flat window gives up=down=100.",
+      "source_ids": [
+        "aroon",
+        "aroon_window"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000501801-aroon-indicator/",
+        "https://www.tradingview.com/support/solutions/43000773004-aroon-oscillator/"
+      ],
+      "unsettled_or_app_choices": [
+        "n+1 window explicitly documented in Aroon Oscillator. Length14 follows Aroon worked example, not verified UI default; most-recent tie rule proposed."
+      ],
+      "verification_cases": [
+        "Oldest extreme age=n ->0; current extreme ->100; tied highs choose newest; n14 reads15bars."
+      ]
+    },
+    {
+      "id": "standard_deviation",
+      "name": "Rolling standard deviation",
+      "category": "volatility_strength",
+      "parameters": {
+        "defaults": {
+          "length": 20,
+          "source": "close",
+          "ddof": 0
+        },
+        "validation": "length integer>=1 and length>ddof; ddof in{0,1}."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "standard_deviation",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "mu=SMA_n(x); sigma=sqrt(sum_n((x-mu[t])^2)/(n-ddof)).",
+      "warmup": "First output n-1 (default19).",
+      "edge_cases": "Constant source gives0. Population n1 gives0; sample ddof1 requires n>=2. Use stable centered accumulation.",
+      "source_ids": [
+        "stddev"
+      ],
+      "source_urls": [
+        "https://raw.githubusercontent.com/QuantConnect/Lean/master/Indicators/StandardDeviation.cs"
+      ],
+      "unsettled_or_app_choices": [
+        "App default20/close/ddof0. LEAN primary source documents population convention; this does not establish TV default."
+      ],
+      "verification_cases": [
+        "n3[1,2,3] ->sqrt(2/3) withddof0 and1 withddof1; constant ->0."
+      ]
+    },
+    {
+      "id": "historical_volatility",
+      "name": "Historical volatility",
+      "category": "volatility_strength",
+      "parameters": {
+        "defaults": {
+          "length": 20,
+          "source": "close",
+          "returns": "log",
+          "ddof": 0,
+          "bars_per_year": 252,
+          "annualization_mode": "explicit"
+        },
+        "validation": "length integer>=2 and length>ddof; ddof in{0,1}; finite bars_per_year>0; positive closes; interval convention required."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "historical_volatility",
+          "units": "annualized_percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "r[t]=ln(C[t]/C[t-1]); HV=100*STD_n(r,ddof)*sqrt(bars_per_year).",
+      "warmup": "First output n (default20); n valid log returns require n+1 positive closes.",
+      "edge_cases": "Nonpositive price gives null. Flat positive prices give0. bars_per_year252 is valid only for an explicitly selected one-session daily equity convention.",
+      "source_ids": [
+        "hv",
+        "stddev"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000589145-historical-volatility/",
+        "https://raw.githubusercontent.com/QuantConnect/Lean/master/Indicators/StandardDeviation.cs"
+      ],
+      "unsettled_or_app_choices": [
+        "TradingView help is conceptual and does not settle formula/defaults. Log returns,20,ddof0 and252 are proposed, not recovered TV parameters.",
+        "For daily 24/7 markets choose365 explicitly; intraday/week/month require explicit frequency/calendar-derived annualization rather than silently reusing252."
+      ],
+      "verification_cases": [
+        "Fixed multiplicative return each bar ->0 volatility; scale bars_per_year252 vs365 changes bysqrt(365/252); reject nonpositiveclose."
+      ]
+    },
+    {
+      "id": "choppiness_index",
+      "name": "Choppiness index",
+      "category": "volatility_strength",
+      "parameters": {
+        "defaults": {
+          "length": 14
+        },
+        "validation": "length integer>=2."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "choppiness_index",
+          "units": "index",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "CHOP=100*log10(sum_n(TR)/(HH_n-LL_n))/log10(n), with TR as ATR(1).",
+      "warmup": "First output n-1 (default13), using initial H-L TR.",
+      "edge_cases": "Zero high-low span or nonpositive log argument gives null; do not clamp extreme values to[0,100] because boundary gaps can affect the ratio.",
+      "source_ids": [
+        "chop",
+        "atr"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000501980-choppiness-index-chop/",
+        "https://www.tradingview.com/support/solutions/43000501823-average-true-range-atr/"
+      ],
+      "unsettled_or_app_choices": [
+        "14 and formula documented; initial TR, null handling and no clamp explicitly chosen."
+      ],
+      "verification_cases": [
+        "Flat range ->null; n1 rejected; boundary gap may produce out-of-range value, which is preserved."
+      ]
+    },
+    {
+      "id": "volume",
+      "name": "Volume",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "color_by": "close_vs_open"
+        },
+        "validation": "Required price inputs finite and valid OHLC; volume finite>=0 with meaningful-volume metadata."
+      },
+      "outputs": [
+        {
+          "id": "volume",
+          "pane": "volume",
+          "units": "provider_volume",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "Output the provider's per-bar V without rescaling its physical unit.",
+      "warmup": "First valid volume bar (index0 if present).",
+      "edge_cases": "Zero is valid observed volume; null is missing. Negative/nonfinite volume rejected. Preserve metadata: shares/contracts/base/ticks and volume quality.",
+      "source_ids": [
+        "chart_info",
+        "plots"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/pine-script-docs/concepts/chart-information/",
+        "https://www.tradingview.com/pine-script-docs/visuals/plots/"
+      ],
+      "unsettled_or_app_choices": [
+        "Provider metadata determines meaningfulness; app must disable dependent studies if unavailable or unsuitable. Equal close/open uses neutral app color."
+      ],
+      "verification_cases": [
+        "V0 stays0; missing V staysnull; provider unit retained."
+      ]
+    },
+    {
+      "id": "volume_ma",
+      "name": "Volume moving average",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "length": 20,
+          "method": "sma"
+        },
+        "validation": "Length is integer>=1."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "volume",
+          "units": "provider_volume",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "SMA_n(V), using per-bar volume in one consistent provider unit.",
+      "warmup": "First output n-1 (default19).",
+      "edge_cases": "Zeros count as real observations; nulls break full-window readiness. Do not average incompatible volume units.",
+      "source_ids": [
+        "volume_ma",
+        "chart_info"
+      ],
+      "source_urls": [
+        "https://tradingview.com/pine-script-docs/language/declaration-statements/",
+        "https://www.tradingview.com/pine-script-docs/concepts/chart-information/"
+      ],
+      "unsettled_or_app_choices": [
+        "SMA(volume) supported by official example; length20 is an app default, not claimed TradingView default."
+      ],
+      "verification_cases": [
+        "n3 V[0,3,6] ->3; null not replaced with0."
+      ]
+    },
+    {
+      "id": "obv",
+      "name": "On-balance volume",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "source": "close",
+          "baseline": 0
+        },
+        "validation": "Required price inputs finite and valid OHLC; volume finite>=0 with meaningful-volume metadata."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "obv",
+          "units": "provider_volume",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "OBV[0]=0; for t>=1, OBV[t]=OBV[t-1]+sign(C[t]-C[t-1])*V[t].",
+      "warmup": "First output index0 when close/volume valid; no directional contribution from initial bar.",
+      "edge_cases": "Equal closes or zero V add0. Missing required price/volume poisons cumulative total until explicitly reset/reloaded; do not silently resume as though missing flow were0.",
+      "source_ids": [
+        "obv"
+      ],
+      "source_urls": [
+        "https://in.tradingview.com/support/solutions/43000502593-on-balance-volume-obv/"
+      ],
+      "unsettled_or_app_choices": [
+        "Recurrence documented; baseline0 and cumulative gap policy are app choices. Loading more history may change absolute level."
+      ],
+      "verification_cases": [
+        "C[10,11,11,9],V[5,7,8,4] ->[0,7,7,3]; missing flow invalidates tail."
+      ]
+    },
+    {
+      "id": "mfi",
+      "name": "Money flow index",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "length": 14,
+          "source": "hlc3"
+        },
+        "validation": "length integer>=1; HLC3>=0; valid nonnegative volume."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "mfi",
+          "units": "percent",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "TP=HLC3; flow=TP*V; positive=flow when TP>prevTP else0; negative=flow when TP<prevTP else0; P=sum_n(positive),N=sum_n(negative); MFI=100*P/(P+N).",
+      "warmup": "First output index n (default14), from n transitions; prior TP is required.",
+      "edge_cases": "Unchanged TP contributes neither side. If P=N=0 return null; P>0,N0 gives100; P0,N>0 gives0. Zero volume contributes0. Negative TP unsupported for this bounded money-flow variant.",
+      "source_ids": [
+        "mfi"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502348-money-flow-mfi/"
+      ],
+      "unsettled_or_app_choices": [
+        "14/TP formula documented; first transition, no-flow null and nonnegative TP restriction are explicit choices."
+      ],
+      "verification_cases": [
+        "Rising TP with positiveV ->100; falling ->0; unchanged TP or all-zero V ->null."
+      ]
+    },
+    {
+      "id": "cmf",
+      "name": "Chaikin money flow",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "length": 20
+        },
+        "validation": "Length is integer>=1."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "cmf",
+          "units": "ratio",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "CLV=(2*C-H-L)/(H-L); moneyFlowVolume=CLV*V; CMF=sum_n(moneyFlowVolume)/sum_n(V).",
+      "warmup": "First output n-1 (default19), provided volume sum>0.",
+      "edge_cases": "H=L chooses CLV0, hence contribution0; total volume0 gives null. Do not replace missing V with0.",
+      "source_ids": [
+        "cmf",
+        "adl"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000501974-chaikin-money-flow-cmf/",
+        "https://www.tradingview.com/support/solutions/43000501770-accumulation-distribution-adl/"
+      ],
+      "unsettled_or_app_choices": [
+        "App chooses20; source discusses20/21 and illustrates21. Zero-range0 and zero-volume null are proposed conventions."
+      ],
+      "verification_cases": [
+        "H=L with positiveV contributes0; allzeroV ->null; balanced close-location flow ->0."
+      ]
+    },
+    {
+      "id": "accumulation_distribution",
+      "name": "Accumulation/distribution",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "baseline": 0
+        },
+        "validation": "Required price inputs finite and valid OHLC; volume finite>=0 with meaningful-volume metadata."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "accumulation_distribution",
+          "units": "provider_volume",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "CLV=(2*C-H-L)/(H-L); ADL[t]=sum_{i=0..t}(CLV[i]*V[i]) with cumulative baseline0 before first bar.",
+      "warmup": "First output index0 equals first valid money-flow-volume contribution.",
+      "edge_cases": "H=L chooses CLV0; zero V contributes0. Missing required input invalidates subsequent cumulative output until explicit reset/reload.",
+      "source_ids": [
+        "adl"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000501770-accumulation-distribution-adl/"
+      ],
+      "unsettled_or_app_choices": [
+        "Initial baseline, first-bar contribution and zero-range0 are app choices. Loading earlier history shifts absolute level."
+      ],
+      "verification_cases": [
+        "H10,L0,C10,V5 ->first ADL5; next close atlow,V3 ->ADL2; H=L contribution0."
+      ]
+    },
+    {
+      "id": "chaikin_oscillator",
+      "name": "Chaikin oscillator",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "fast": 3,
+          "slow": 10,
+          "seed": "sma"
+        },
+        "validation": "Integers1<=fast<slow."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "chaikin_oscillator",
+          "units": "provider_volume",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "Chaikin=EMA_fast(ADL)-EMA_slow(ADL), using the same ADL convention as accumulation_distribution.",
+      "warmup": "First output slow-1 (default9) if ADL valid fromindex0.",
+      "edge_cases": "Inherits cumulative missing-volume invalidation; a constant additive ADL baseline cancels after both consistently seeded EMAs become ready.",
+      "source_ids": [
+        "chaikin",
+        "adl"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000501979-chaikin-oscillator/",
+        "https://www.tradingview.com/support/solutions/43000501770-accumulation-distribution-adl/"
+      ],
+      "unsettled_or_app_choices": [
+        "3/10 is source worked configuration; SMA seeds chosen by app."
+      ],
+      "verification_cases": [
+        "Constant ADL ->0 afterslow seed; adding constant baseline leaves ready oscillator unchanged."
+      ]
+    },
+    {
+      "id": "session_vwap",
+      "name": "Session VWAP",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "source": "hlc3",
+          "session_mode": "instrument_regular",
+          "reset": "session"
+        },
+        "validation": "Source enum; validated instrument calendar/timezone; intraday bars must fit wholly inside configured sessions."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "For each configured session accumulate PV=sum(HLC3*V),Q=sum(V); VWAP=PV/Q; reset PV,Q at next session boundary before adding its first eligible bar.",
+      "warmup": "First positive cumulative-volume bar of a complete session. If loaded data begins mid-session, output null until missing prefix is loaded or next known session begins.",
+      "edge_cases": "Q0 gives null; subsequent zero V leaves previous VWAP unchanged. Missing volume/price invalidates rest of session; next valid complete session can recover.",
+      "source_ids": [
+        "vwap",
+        "sessions"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000502018-volume-weighted-average-price-vwap/",
+        "https://www.tradingview.com/pine-script-docs/concepts/sessions/"
+      ],
+      "unsettled_or_app_choices": [
+        "HLC3 documented; exact session calendar, regular/extended inclusion and partial-session policy are app choices. Exchange timezone controls reset, chart display timezone does not.",
+        "For24/7 instruments use explicit UTC-midnight sessions. Daily bars with session resets reduce to one-bar source values, so hide/disable by default."
+      ],
+      "verification_cases": [
+        "HLC3[10,20],V[1,3] ->[10,17.5]; next session resets; first zero-volume bar null.",
+        "Mid-session truncated load remainsnull; extended-session toggle/calendar/DST use explicit IDs."
+      ]
+    },
+    {
+      "id": "anchored_vwap",
+      "name": "Anchored VWAP",
+      "category": "volume",
+      "parameters": {
+        "defaults": {
+          "source": "hlc3",
+          "anchor_time": null,
+          "anchor_snap": "first_bar_open_at_or_after",
+          "reset": "none"
+        },
+        "validation": "anchor_time required timezone-aware timestamp; no implicit first-dataset-bar anchor; source enum."
+      },
+      "outputs": [
+        {
+          "id": "value",
+          "pane": "price",
+          "units": "price",
+          "plot_offset_bars": 0
+        }
+      ],
+      "formula": "Beginning at explicit anchor bar a, VWAP[t]=sum_{i=a..t}(x[i]*V[i])/sum_{i=a..t}(V[i]); output null for t<a.",
+      "warmup": "Anchor is required; first positive cumulative-volume bar at/after anchor and only when the anchor prefix is available.",
+      "edge_cases": "Zero cumulative V gives null; later zero bars retain value. No daily reset. Missing required input invalidates later values until prefix repaired or user changes anchor.",
+      "source_ids": [
+        "avwap",
+        "avwap_source",
+        "vwap"
+      ],
+      "source_urls": [
+        "https://www.tradingview.com/support/solutions/43000669764-anchored-vwap-drawing-tool/",
+        "https://www.tradingview.com/blog/en/anchored-vwap-configuring-input-data-and-other-improvements-18978/",
+        "https://www.tradingview.com/support/solutions/43000502018-volume-weighted-average-price-vwap/"
+      ],
+      "unsettled_or_app_choices": [
+        "User-selected start documented; default HLC3 and timestamp snap rule are app choices. Selecting an actual bar stores its opening timestamp; arbitrary timestamp snaps forward, never includes pre-anchor volume.",
+        "A hindsight-selected anchor may be used for drawing but cannot enter a historical strategy before its decision/creation time."
+      ],
+      "verification_cases": [
+        "Anchor at second bar excludes firstbar volume; zeroV untilpositive returnsnull; crosses session withoutreset.",
+        "Late decision timestamp forbids hindsight anchor use in strategy prefix."
+      ]
+    }
+  ]
+}

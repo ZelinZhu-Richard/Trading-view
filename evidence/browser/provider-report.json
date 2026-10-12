@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-12T00:07:38.002Z",
+  "status": "passed",
+  "browser": "155.0.8059.39",
+  "checks": [
+    "Provider dialog",
+    "Coinbase product search",
+    "Historical data request",
+    "Chart and watchlist selection",
+    "Real live quote displayed",
+    "Saved dataset and quote resubscription after reload"
+  ],
+  "pageErrors": []
+}

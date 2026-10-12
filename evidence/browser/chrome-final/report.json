@@ -1,0 +1,11 @@
+{
+  "date": "2026-10-12T02:32:23.516Z",
+  "browser": "155.0.8059.39",
+  "results": [
+    "Example data loaded: 365 source bars and visible chart, 1280×800 dark.",
+    "Heikin-Ashi display, four-chart layout, light theme, and save/reload passed.",
+    "Real browser CSV file selection, mapping, preview, commit, chart selection, watchlist addition and autosave passed."
+  ],
+  "pageErrors": [],
+  "status": "passed"
+}

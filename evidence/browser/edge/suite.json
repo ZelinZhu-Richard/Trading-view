@@ -1,0 +1,60 @@
+{
+  "label": "edge",
+  "date": "2026-10-12T02:31:15.521Z",
+  "executable": "/Users/richardzhu/dev/REA/workspace/market-workbench/.toolchain/edge/expanded/MicrosoftEdge-155.0.4283.45.pkg/Payload/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+  "release": {
+    "version": "155.0.4283.45",
+    "url": "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/e7bb64c8-bda9-4a93-8a9c-1016b460d50c/MicrosoftEdge-155.0.4283.45.pkg",
+    "sha256": "9f34fb05d8c66440cd8f972dc0c34d0f9e9ef25827525c093117ba61d69ee2e1",
+    "bytes": 432193641,
+    "source": "https://edgeupdates.microsoft.com/api/products?view=enterprise"
+  },
+  "runs": [
+    {
+      "name": "smoke",
+      "seconds": 8.209,
+      "code": 0
+    },
+    {
+      "name": "watchlists",
+      "seconds": 4.015,
+      "code": 0
+    },
+    {
+      "name": "indicators",
+      "seconds": 4.786,
+      "code": 0
+    },
+    {
+      "name": "drawings",
+      "seconds": 7.184,
+      "code": 0
+    },
+    {
+      "name": "alerts",
+      "seconds": 6.986,
+      "code": 0
+    },
+    {
+      "name": "python",
+      "seconds": 3.907,
+      "code": 0
+    },
+    {
+      "name": "replay",
+      "seconds": 7.241,
+      "code": 0
+    },
+    {
+      "name": "research",
+      "seconds": 9.166,
+      "code": 0
+    },
+    {
+      "name": "links",
+      "seconds": 14.329,
+      "code": 0
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,71 @@
+import { browserExecutable, evidenceDirectory } from './browser-runtime.mjs';
+import { chromium, expect } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+await mkdir(evidenceDirectory, { recursive: true });
+const browser = await chromium.launch({ executablePath: browserExecutable, headless: true });
+const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+const page = await context.newPage();
+page.setDefaultTimeout(20000);
+const name = `Browser Python ${Date.now()}`;
+const original = await (await context.request.get('http://127.0.0.1:8000/api/workspaces/default')).json();
+let scriptId;
+const errors = [], remoteEditorRequests = [];
+page.on('pageerror', error => errors.push(error.message));
+page.on('request', request => { if (/monaco|editor.*worker/.test(request.url()) && !request.url().startsWith('http://127.0.0.1:5173/')) remoteEditorRequests.push(request.url()); });
+try {
+  await page.goto('http://127.0.0.1:5173/');
+  const panelToggle = page.getByRole('button', { name: 'Toggle data panel', exact: true });
+  await expect(panelToggle).toBeVisible();
+  if (await panelToggle.getAttribute('aria-pressed') === 'false') await panelToggle.click();
+  await page.getByRole('button', { name: 'Python editor', exact: true }).click();
+  await page.getByRole('button', { name: 'New', exact: true }).click();
+  await expect(page.locator('.monaco-editor')).toBeVisible();
+  await page.getByLabel('Python script name', { exact: true }).fill(name);
+  const editor = page.locator('.monaco-editor textarea.inputarea');
+  await editor.focus(); await page.keyboard.press('ControlOrMeta+A');
+  await page.keyboard.insertText('def on_bars(ctx, bars)\n    pass');
+  await expect(page.locator('.python-diagnostics')).toContainText('Line 1:');
+  const source = 'PARAMETERS = {"length": {"type": "int", "default": 3, "minimum": 1}}\n\ndef on_bars(ctx, bars):\n    ctx.log("source saved, not executed")';
+  await editor.focus(); await page.keyboard.press('ControlOrMeta+A'); await page.keyboard.insertText(source);
+  await expect(page.getByText('Syntax and declarations valid', { exact: true })).toBeVisible();
+  await expect(page.locator('.python-diagnostics')).toContainText('length');
+  await page.getByRole('button', { name: 'Save version', exact: true }).click();
+  await expect(page.getByText('Saved version 1', { exact: true })).toBeVisible();
+  scriptId = (await (await context.request.get('http://127.0.0.1:8000/api/scripts')).json()).find(s => s.name === name).id;
+  await editor.focus(); await page.keyboard.press('ControlOrMeta+End'); await page.keyboard.insertText('\n# second saved version\n');
+  await page.getByRole('button', { name: 'Save version', exact: true }).click();
+  await expect(page.getByText('Saved version 2', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Versions', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Load version 1', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Load version 1', exact: true }).click();
+  await page.getByRole('button', { name: 'Save version', exact: true }).click();
+  await expect(page.getByText('Saved version 3', { exact: true })).toBeVisible();
+  const versions = await (await context.request.get(`http://127.0.0.1:8000/api/scripts/${scriptId}/versions`)).json();
+  if (versions[0].source !== source || !versions[1].source.includes('second saved version')) throw new Error('Version restore lost the exact source');
+  await page.reload();
+  await page.getByRole('button', { name: 'Python editor', exact: true }).click();
+  await expect(page.getByLabel('Python script name', { exact: true })).toHaveValue(name);
+  await expect(page.getByText('Saved version 3', { exact: true })).toBeVisible();
+  await page.screenshot({ path: `${evidenceDirectory}/python-editor.png` });
+  const downloaded = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Export Python source', exact: true }).click();
+  const stream = await (await downloaded).createReadStream(); let exported = '';
+  for await (const chunk of stream) exported += chunk.toString();
+  if (exported !== source) throw new Error('Source export differs from saved text');
+  if (errors.length || remoteEditorRequests.length) throw new Error(JSON.stringify({ errors, remoteEditorRequests }));
+  const report = { date: new Date().toISOString(), status: 'passed', browser: await browser.version(),
+    results: ['Local Monaco editor, typing, backend syntax diagnostics, literal parameter declarations, exact-source version save/restore, reload and source export passed.'],
+    pageErrors: errors, remoteEditorRequests, limitations: ['Worker execution and research integration are not part of this authoring check.'] };
+  await writeFile(`${evidenceDirectory}/python-report.json`, JSON.stringify(report, null, 2));
+  console.log(JSON.stringify(report));
+} catch (error) {
+  await page.screenshot({ path: `${evidenceDirectory}/python-failure.png` });
+  await writeFile(`${evidenceDirectory}/python-report.json`, JSON.stringify({ date: new Date().toISOString(), status: 'failed', error: error.message, pageErrors: errors }, null, 2));
+  throw error;
+} finally {
+  await page.close();
+  if (scriptId) await context.request.delete(`http://127.0.0.1:8000/api/scripts/${scriptId}`, { headers: { 'X-Workbench-Request': '1' } });
+  const latest = await (await context.request.get('http://127.0.0.1:8000/api/workspaces/default')).json();
+  await context.request.put('http://127.0.0.1:8000/api/workspaces/default', { headers: { 'X-Workbench-Request': '1' }, data: { ...original, revision: latest.revision } });
+  await browser.close();
+}

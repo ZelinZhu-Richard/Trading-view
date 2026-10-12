@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "hardware": {
+    "platform": "macOS-26.6.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "logical_cpus": 14,
+    "memory_bytes": 51539607552
+  },
+  "workload": {
+    "instruments": 20,
+    "bars_each": 2516,
+    "bars_total": 50320,
+    "start": "2015-01-02 00:00:00",
+    "end": "2024-12-31 00:00:00",
+    "strategy": "Monthly equal-weight rebalance",
+    "synthetic": true
+  },
+  "run_id": "474105f9-4b21-48b9-b265-4df68c11ca09",
+  "dataset_hashes": [
+    "fe6e3c476326dc621bc3dc6493b6e1fad3ef4e170ef86f39b7a01c5bfa8585f9",
+    "157f538e3c6a29adf6dfbff6640db68f24f8653feb311792c56e6b84c7788378",
+    "8c5b4bfd2915d6ab69c9e7ec9dde56f232cc2fab646cb77da14f4ce743147c52",
+    "624ace0bfe5fe131aec63cf2aee6b49a4e22d9820c23e6ee7bc2a7d6e2fedc8f",
+    "daf942e25cb82b7ae95516cdf013ad53713808e52f9909b28c32057dad905167",
+    "ad7556e738be5a5bb20097d8ef20e3242fb0074b7fa8e6e8667e92035ed05205",
+    "3332e851fb7932d731e1b990756923194a8a8810b1961529288f35800ff81be3",
+    "939a08a8ccd18cd422c94d256bb55df43f0ee0f5b4f6318f59acc3413e67cd72",
+    "2b5e167fb596958e4c379852aa03cebd652832daf9605652c4869b0d11a75bb6",
+    "f96e28334566ffae0afe6d0f16385943a1943b41def108c513626b9cfd0bcb9a",
+    "a4add8bfe4104f9fbaeffdb21626068b36901a31e1a4974984b8e836018ee242",
+    "106b02912624ad6af710e7074ee8c1e1775e9f186c19fc399d2cab9209d036f9",
+    "eac343c6237e364d01f5336dee088b186b0634b2c19ee1bae9e97d5cf2491628",
+    "994671c80c1795eb19b49d5f60b8a65564ad60432328f32e24d7401440aa59b6",
+    "198f7eb41e171518a648b93ce2ede1d3fc836a174169a572a78dab82f60a4e95",
+    "3d636d76fa6db9d37a221d6a23287a59215279dae718b39e2747407d11c459ec",
+    "a80911cb97daee75f6b93985372e6b7be29e0ac181939fadd265334b4bf758a4",
+    "3d31d70e1bd3e848708e400e679872486342fec05fa5ff148afcb47b94f57263",
+    "ab30f9ec48ade8bb4b57b85c8658fba03ca06a8f78963b39f95ba663e737024a",
+    "8940859a4b6e057e9f6d80f51762a27b11b4a2bd173d71dcb2c4ebe2af22cc0b"
+  ],
+  "snapshot_seconds": 0.4332786670420319,
+  "worker_seconds": 4.9836862909724005,
+  "sampled_peak_worker_tree_rss_bytes": 299745280,
+  "sampling_seconds": 0.25,
+  "orders": 1173,
+  "fills": 1173,
+  "equity_points": 5032,
+  "result_hash": "057e1c1b9c97289023f52c5177e24fc0c605775be6b889a0d211282144845405",
+  "snapshot_hash": "6da041f92f109d7a9843294c78e9d37b1ff2b915165170071dd181f4e29af39d",
+  "limitations": [
+    "Synthetic prices measure computation, not market returns.",
+    "Memory is sampled resident memory of the worker and observed descendants, not all application processes."
+  ]
+}

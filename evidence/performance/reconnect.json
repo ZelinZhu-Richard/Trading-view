@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "provider": "Coinbase public WebSocket",
+  "induced_failure": "Closed only the owned client socket; no external network change",
+  "reconnect_to_live_quote_seconds": 1.4927802080055699,
+  "connections": 2,
+  "subscriptions_after_cleanup": 0,
+  "tasks_after_cleanup": 0,
+  "statuses": [
+    {
+      "type": "status",
+      "status": "connecting"
+    },
+    {
+      "type": "status",
+      "status": "connected",
+      "reconnect_attempt": 0
+    },
+    {
+      "type": "status",
+      "status": "reconnecting",
+      "reconnect_attempt": 1,
+      "detail": "Quote connection unavailable; retained prices are stale."
+    },
+    {
+      "type": "status",
+      "status": "connected",
+      "reconnect_attempt": 1
+    }
+  ],
+  "first_quote_time": 1791772384,
+  "reconnected_quote_time": 1791772385,
+  "rss_before": 122404864,
+  "rss_after": 128679936,
+  "memory_scope": "Python benchmark process endpoints, not peak or full application memory",
+  "hardware": {
+    "arch": "arm64",
+    "platform": "macOS-26.6.1-arm64-arm-64bit",
+    "logical_cores": 14,
+    "memory": 51539607552
+  }
+}

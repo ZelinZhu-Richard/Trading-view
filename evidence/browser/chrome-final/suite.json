@@ -1,0 +1,59 @@
+{
+  "label": "chrome-final",
+  "date": "2026-10-12T02:33:27.328Z",
+  "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "release": null,
+  "runs": [
+    {
+      "name": "smoke",
+      "seconds": 7.117,
+      "code": 0
+    },
+    {
+      "name": "watchlists",
+      "seconds": 3.735,
+      "code": 0
+    },
+    {
+      "name": "indicators",
+      "seconds": 4.924,
+      "code": 0
+    },
+    {
+      "name": "drawings",
+      "seconds": 7.351,
+      "code": 0
+    },
+    {
+      "name": "alerts",
+      "seconds": 6.859,
+      "code": 0
+    },
+    {
+      "name": "python",
+      "seconds": 3.905,
+      "code": 0
+    },
+    {
+      "name": "replay",
+      "seconds": 7.027,
+      "code": 0
+    },
+    {
+      "name": "research",
+      "seconds": 8.743,
+      "code": 0
+    },
+    {
+      "name": "links",
+      "seconds": 14.487,
+      "code": 0
+    },
+    {
+      "name": "drawing-edges",
+      "seconds": 6.697,
+      "code": 0
+    }
+  ],
+  "passed": true
+}

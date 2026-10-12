@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-12T02:32:46.392Z",
+  "status": "passed",
+  "browser": "155.0.8059.39",
+  "results": [
+    "Created recurring completed-price crossing alert in UI; importing two new crossings produced two stored events and an in-app notification.",
+    "Pause/resume, reload persistence and repeated-evaluation deduplication passed."
+  ],
+  "pageErrors": []
+}

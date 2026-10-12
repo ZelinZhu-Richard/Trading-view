@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "date": "2026-10-12T02:45:03.049078+00:00",
+  "restart_seconds": 0.6731433339882642,
+  "process_ids": [
+    33296,
+    33308
+  ],
+  "observed_offline_and_recovery": true,
+  "snapshot_directory": "evidence/recovery/saved-work-nl8jjj5e",
+  "hashes": {
+    "workspace": "fac6ae4ff23990d0d9d318ffccb6caebfa8fa6dfa56632f5f359d1f033b0eb05",
+    "scriptVersions": "afcb0d32fbed5e9abd47d27bb8b54220b17ad48f89e5eb514e96baff46f147ae",
+    "paper": "18f9d7d34ce3fcfbe6d268a81e6864c8b6bdc5d68a70542eb45b212fbc3099c7",
+    "result": "807098d2b15738a4230a7c6c6be245d042469da388622098bb1e6776157d64a9",
+    "alertHistory": "b0be8b038d82fecc0f872f0f19b710962ebd9d3ae6bb41caa124df1efec26ca0"
+  },
+  "account_id": "e113b436-254c-48f9-9a87-c7024ec953dc",
+  "job_id": "236bcb3b-c5d4-457c-97fa-9896ac9bee1d",
+  "script_id": "7333cd6b-7860-4378-ad5b-1a886c393e7b",
+  "checks": [
+    "Credential-free SQLite backup plus immutable datasets and saved runs",
+    "Actual process exit and new process startup",
+    "Workspace and locked time/price drawing unchanged",
+    "Two exact source versions unchanged",
+    "Previously filled Coinbase-source paper position unchanged",
+    "Completed result and nonempty alert history unchanged"
+  ],
+  "browser_restoration": {
+    "status": "passed",
+    "browser": "Codex in-app browser on macOS",
+    "serving": "built frontend served by restarted Python service on isolated port 8001",
+    "observed": [
+      "Locked Recovery trend has restored UTC anchors and prices",
+      "Filled 0.00010000 BTC-USD position at average 83880.68 in paused paper account",
+      "Recovery verification source and versions 1/2 displayed",
+      "Saved completed research run displays equity, metric conventions, and export action"
+    ],
+    "screenshots": [
+      "restored-drawing.png",
+      "restored-paper.png",
+      "restored-result.png"
+    ]
+  }
+}

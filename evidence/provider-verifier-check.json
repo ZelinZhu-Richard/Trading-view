@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "scope": "Verifier qualification using explicit fixtures; not real-provider delivery",
+  "cases": [
+    "fresh_current_trade",
+    "cached_stale_quote",
+    "older_trade",
+    "future_timestamp",
+    "different_feed",
+    "different_instrument",
+    "authentication_only"
+  ]
+}

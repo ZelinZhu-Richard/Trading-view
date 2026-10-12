@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-12T05:02:48.737884+00:00",
+  "status": "passed",
+  "scope": "Repository relocation, local startup and test baseline; not full product acceptance",
+  "previous_directory": "workspace/market-workbench",
+  "current_directory": "workspace/trading-view",
+  "data_preservation": "Directory renamed without copying or modifying credential contents; provider configuration presence checked through the public status endpoint only",
+  "configured_providers_retained": {
+    "alpaca": true,
+    "alpha-vantage": true
+  },
+  "http_checks": {
+    "development_frontend": {
+      "url": "http://127.0.0.1:5173/",
+      "http_status": 200
+    },
+    "backend": {
+      "url": "http://127.0.0.1:8000/api/health",
+      "http_status": 200,
+      "health": "ok"
+    },
+    "built_frontend": {
+      "url": "http://127.0.0.1:8000/",
+      "http_status": 200
+    },
+    "chrome_verification_workspace": {
+      "url": "http://127.0.0.1:8001/api/health",
+      "http_status": 200,
+      "health": "ok"
+    }
+  },
+  "backend_tests": {
+    "passed": 243,
+    "report": "evidence/relocation-backend-tests.xml",
+    "duration_seconds": 7.64
+  },
+  "restricted_test_attempt": {
+    "passed": 238,
+    "failed": 5,
+    "report": "evidence/relocation-sandbox-tests.xml",
+    "reason": "macOS sandbox denied sysctl process inspection; all tests passed when process inspection was enabled"
+  },
+  "frontend_tests": {
+    "passed": 34,
+    "files": 3
+  },
+  "production_build": {
+    "status": "passed",
+    "includes_typescript_check": true,
+    "warning": "Large lazy-loaded Monaco chunk"
+  },
+  "acceptance_mapping": {
+    "status": "passed",
+    "rows": 420
+  },
+  "remaining_acceptance": [
+    "Windows operation unavailable for verification",
+    "Actual Alpaca IEX trade delivery unverified"
+  ]
+}

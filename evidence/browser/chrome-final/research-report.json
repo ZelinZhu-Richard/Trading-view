@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "date": "2026-10-12T02:33:06.070Z",
+  "browser": "155.0.8059.39",
+  "jobs": [
+    "236bcb3b-c5d4-457c-97fa-9896ac9bee1d",
+    "2e661093-3654-4def-974e-897f84feee7b"
+  ],
+  "results": [
+    "Explicit Run settings and generated parameters; completed result, fill table, CSV export, logs, immutable input inspection, comparison, reload, active-job chart interaction and cancellation passed."
+  ],
+  "interactionMs": 66.12145899999996,
+  "cancellationMs": 1809.618375,
+  "pageErrors": [],
+  "limitations": [
+    "Synthetic test prices; not a market-performance claim. Replay and paper mode are outside this check."
+  ]
+}

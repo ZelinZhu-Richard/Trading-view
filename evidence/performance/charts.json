@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-12T00:37:17.277Z",
+  "status": "passed",
+  "browser": "155.0.8059.39",
+  "hardware": {
+    "platform": "darwin",
+    "release": "25.6.0",
+    "arch": "arm64",
+    "logical_cpus": 14,
+    "cpu_model": "Apple M4 Pro",
+    "physical_memory_bytes": 51539607552
+  },
+  "workload": {
+    "charts": 4,
+    "bars_per_chart": 10000,
+    "indicators_per_chart": 5,
+    "indicators": [
+      "ema",
+      "sma",
+      "rsi",
+      "macd",
+      "bollinger_bands"
+    ],
+    "dataset_id": "b904f885d447de067fac93265ba88be31753e2d9f615ce1eaea294f2e1c0416a",
+    "source": "explicitly synthetic CSV, same immutable dataset in all four charts",
+    "viewport": [
+      1920,
+      1080
+    ]
+  },
+  "measurements": {
+    "navigation_to_four_ready_charts_ms": 1243.197709,
+    "calculation_requests": [
+      {
+        "status": 200,
+        "request_ms": 635.489
+      },
+      {
+        "status": 200,
+        "request_ms": 646.454
+      },
+      {
+        "status": 200,
+        "request_ms": 652.071
+      },
+      {
+        "status": 200,
+        "request_ms": 687.9
+      }
+    ],
+    "six_five_step_drag_and_two_frame_roundtrip_ms": [
+      152.5191249999998,
+      132.640042,
+      133.1802499999999,
+      133.25420899999972,
+      133.3465839999999,
+      133.41112499999963
+    ],
+    "renderer_js_heap_before_bytes": 189208512,
+    "renderer_js_heap_after_bytes": 204883200,
+    "renderer_task_duration_delta_seconds": 0.30211600000000005
+  },
+  "limitations": [
+    "One macOS Chrome run, development build; timings include automation overhead.",
+    "Renderer JS heap is not whole-process RSS; no total application peak-memory claim.",
+    "Concurrent research jobs, other browsers/platforms and cold provider-network workloads remain unverified."
+  ],
+  "pageErrors": []
+}

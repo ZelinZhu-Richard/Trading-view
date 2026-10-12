@@ -1,0 +1,73 @@
+{
+  "date": "2026-10-12T03:37:57.923564+00:00",
+  "kind": "actual configured provider requests",
+  "history": [
+    {
+      "provider": "alpha-vantage",
+      "symbol": "EUR/USD",
+      "id": "5953dd2a7c48f211b51a8511a258f2a4b7d22859bc1c8599d6b8faea076c9c78",
+      "bars": 64,
+      "feed": "FX_DAILY",
+      "timezone": "UTC",
+      "hash": "5953dd2a7c48f211b51a8511a258f2a4b7d22859bc1c8599d6b8faea076c9c78",
+      "aggregated_bars": {
+        "1w": 13,
+        "1mo": 4
+      }
+    },
+    {
+      "provider": "alpaca",
+      "symbol": "AAPL",
+      "id": "05cd3cd76392d894dccc1f1c167153cb20ed423914fe0aea58548c996171f156",
+      "bars": 63,
+      "feed": "iex",
+      "timezone": "America/New_York",
+      "hash": "05cd3cd76392d894dccc1f1c167153cb20ed423914fe0aea58548c996171f156",
+      "aggregated_bars": {
+        "1w": 13,
+        "1mo": 4
+      }
+    },
+    {
+      "provider": "alpaca",
+      "symbol": "SPY",
+      "id": "4f89dc33caf2a6e5a1a19f6fca1e18d8aa6d363d9d739e84e1be5645dc54c234",
+      "bars": 63,
+      "feed": "iex",
+      "timezone": "America/New_York",
+      "hash": "4f89dc33caf2a6e5a1a19f6fca1e18d8aa6d363d9d739e84e1be5645dc54c234",
+      "aggregated_bars": {
+        "1w": 13,
+        "1mo": 4
+      }
+    }
+  ],
+  "stream": {
+    "provider": "alpaca",
+    "authenticated_connection": true,
+    "quote_received": false,
+    "live_trade_received": false,
+    "started_at": 1791776278,
+    "unsubscribe_acknowledged": true,
+    "events": [
+      {
+        "type": "status",
+        "status": "connecting",
+        "subscription": "quote:configured-verification"
+      },
+      {
+        "type": "status",
+        "status": "connected",
+        "reconnect_attempt": 0,
+        "subscription": "quote:configured-verification"
+      }
+    ],
+    "observation_seconds": 20,
+    "limitation": "Connection status proves authentication. Live trade delivery requires Alpaca/IEX data for this instrument timestamped during this check; cached or stale quotes cannot satisfy it. No generated substitute quotes."
+  },
+  "errors": [],
+  "retained_alpha_vantage_check_date": "2026-10-12T02:44:03.902533+00:00",
+  "retained_history_check_date": "2026-10-12T02:46:06.468854+00:00",
+  "history_status": "passed",
+  "status": "partial"
+}

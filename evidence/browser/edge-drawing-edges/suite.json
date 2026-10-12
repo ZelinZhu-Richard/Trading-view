@@ -1,0 +1,20 @@
+{
+  "label": "edge-drawing-edges",
+  "date": "2026-10-12T02:31:45.888Z",
+  "executable": "/Users/richardzhu/dev/REA/workspace/market-workbench/.toolchain/edge/expanded/MicrosoftEdge-155.0.4283.45.pkg/Payload/Microsoft Edge.app/Contents/MacOS/Microsoft Edge",
+  "release": {
+    "version": "155.0.4283.45",
+    "url": "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/e7bb64c8-bda9-4a93-8a9c-1016b460d50c/MicrosoftEdge-155.0.4283.45.pkg",
+    "sha256": "9f34fb05d8c66440cd8f972dc0c34d0f9e9ef25827525c093117ba61d69ee2e1",
+    "bytes": 432193641,
+    "source": "https://edgeupdates.microsoft.com/api/products?view=enterprise"
+  },
+  "runs": [
+    {
+      "name": "drawing-edges",
+      "seconds": 7.715,
+      "code": 0
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "browser": "155.0.8059.39",
+  "checks": [
+    "symbol linking restricted to visible matching nonempty group",
+    "unlinked intervals preserved",
+    "independent group stays independent",
+    "interval linking preserves other symbols",
+    "six chart variants and three scales render",
+    "keyboard focus visible"
+  ],
+  "loops": 8,
+  "roundtripMs": [
+    1248.2959579999997,
+    1118.2515000000003,
+    1167.0802079999994,
+    1097.9313750000001,
+    1076.8344159999997,
+    1112.8866249999992,
+    1155.6471249999995,
+    1150.7906250000015
+  ],
+  "automationOverheadIncluded": true,
+  "rendererHeapBytes": 56219320,
+  "hardware": {
+    "arch": "arm64",
+    "cpus": 14,
+    "memory": 51539607552
+  },
+  "errors": []
+}

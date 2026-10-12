@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "kind": "actual Coinbase public data / simulated local orders",
+  "datasetId": "2347f0f7d7268fbb4a6470c5c1048415cba68d9a8d9e37baa678fbead0a9d29d",
+  "initialBars": 7,
+  "refreshedDatasetId": "bf68a476d7e5441f339d9ada7b36caf14565edf0b8ebb3d1f521ae7fde26cb4a",
+  "refreshedBars": 12,
+  "accountId": "e113b436-254c-48f9-9a87-c7024ec953dc",
+  "submitted": {
+    "schema_version": 1,
+    "id": "manual-8c8fa6ab-1061-42d8-9809-30f5203b1683",
+    "sequence": 1,
+    "request": {
+      "schema_version": 1,
+      "instrument_id": "COINBASE:BTC-USD",
+      "side": "buy",
+      "quantity": "0.00010000",
+      "kind": "market",
+      "entry_kind": "market",
+      "limit_price": null,
+      "stop_price": null,
+      "take_profit": null,
+      "stop_loss": null,
+      "tag": "Manual paper"
+    },
+    "submitted_at": 1791771553,
+    "eligible_from": 1791771553,
+    "status": "pending",
+    "reason": null,
+    "parent_id": null,
+    "sibling_id": null,
+    "activated_bar_start": null,
+    "activation_phase": null,
+    "completed_at": null
+  },
+  "fill": {
+    "schema_version": 1,
+    "id": "fill-1",
+    "order_id": "manual-8c8fa6ab-1061-42d8-9809-30f5203b1683",
+    "instrument_id": "COINBASE:BTC-USD",
+    "side": "buy",
+    "quantity": "0.00010000",
+    "price": "83880.68",
+    "fee": "0E-10",
+    "quote_currency": "USD",
+    "time": 1791771600,
+    "bar_start": 1791771600,
+    "phase": "open",
+    "dataset_id": "c21f358f2faa5fdde58ed3f091966835c6504a95093be1c6892eb3e43720a648",
+    "source": "coinbase",
+    "feed": "exchange",
+    "conversion": {
+      "schema_version": 1,
+      "at": 1791771600,
+      "from_currency": "USD",
+      "to_currency": "USD",
+      "rate": "1",
+      "legs": [],
+      "purpose": "fill and realized P/L"
+    }
+  },
+  "frozenId": "c21f358f2faa5fdde58ed3f091966835c6504a95093be1c6892eb3e43720a648",
+  "checks": [
+    "visible chart subscription catches up real completed candles",
+    "paper fill waits for an opening at or after actual submission time",
+    "same provider history advances chart and account",
+    "pause and follow-off persist",
+    "reopen preserves filled account"
+  ],
+  "websocketMessages": 129,
+  "errors": []
+}

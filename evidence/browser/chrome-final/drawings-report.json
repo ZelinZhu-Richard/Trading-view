@@ -1,0 +1,10 @@
+{
+  "date": "2026-10-12T02:32:39.528Z",
+  "status": "passed",
+  "browser": "155.0.8059.39",
+  "results": [
+    "All 24 drawing families created through pointer interaction and saved with time/price anchors.",
+    "Anchor drag, complete-action undo/redo, label/style edit, lock, hide/show, duplicate/delete and reload persistence passed."
+  ],
+  "pageErrors": []
+}

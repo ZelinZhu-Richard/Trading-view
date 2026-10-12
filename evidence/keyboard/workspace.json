@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:8001/",
+  "data_directory": "evidence/keyboard/workspace-oxzupqbz",
+  "watchlist_sizes": [
+    1,
+    1201
+  ],
+  "source": "Deterministic synthetic data; no provider configuration copied",
+  "dataset_ids": [
+    "42a691bc53df815b17b8fc913d54b9e765dc93d681eed7173fee25323c755cf6",
+    "527777ba8884b4699a264b5bdc94b73becae7191b967252f5ca105a59e34b7be"
+  ],
+  "bars_per_dataset": 365
+}

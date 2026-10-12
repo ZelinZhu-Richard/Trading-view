@@ -1,0 +1,72 @@
+import { browserExecutable, evidenceDirectory } from './browser-runtime.mjs';
+import { chromium, expect } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+const output = evidenceDirectory;
+await mkdir(output, { recursive: true });
+const browser = await chromium.launch({ executablePath: browserExecutable, headless: true });
+const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+page.setDefaultTimeout(10000);
+const errors = [];
+page.on('pageerror', error => errors.push(error.message));
+const results = [];
+const headers = { 'X-Workbench-Request': '1' }, endpoint = 'http://127.0.0.1:8000/api';
+const original = await (await page.request.get(endpoint+'/workspaces/default')).json();
+const dataset = await (await page.request.post(endpoint+'/examples/dataset', { headers })).json();
+await page.request.put(endpoint+'/workspaces/default', { headers, data: { ...original, layout: 1, active_chart: 0, bottom_open: true, charts: original.charts.map(c => ({ ...c, dataset_id: dataset.id, follow_live: false, drawings: [], indicators: [] })) } });
+try {
+  await page.goto('http://127.0.0.1:5173/');
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: '1 chart layout', exact: true }).click();
+  if (await page.getByRole('button', { name: 'Switch to dark theme' }).isVisible()) await page.getByRole('button', { name: 'Switch to dark theme' }).click();
+  const example = page.getByRole('button', { name: 'Open synthetic example' });
+  if (await example.isVisible()) await example.click();
+  await expect(page.getByText('SYNTHETIC EXAMPLE', { exact: true })).toBeVisible();
+  await expect(page.locator('canvas').first()).toBeVisible();
+  await expect(page.getByText('365 bars', { exact: true })).toBeVisible();
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  await page.screenshot({ path: `${output}/1280-dark-single.png` });
+  results.push('Example data loaded: 365 source bars and visible chart, 1280×800 dark.');
+
+  await page.getByLabel('Chart type', { exact: true }).selectOption('heikin-ashi');
+  await expect(page.getByText('Heikin-Ashi display · source OHLC retained for calculations')).toBeVisible();
+  await page.getByLabel('Chart type', { exact: true }).selectOption('candlestick');
+  await page.getByRole('button', { name: '4 chart layout', exact: true }).click();
+  await expect(page.getByText('SYNTHETIC EXAMPLE', { exact: true })).toHaveCount(4);
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  await page.screenshot({ path: `${output}/1280-dark-four.png` });
+  await page.getByRole('button', { name: 'Switch to light theme' }).click();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  await page.setViewportSize({ width: 1920, height: 1080 });
+  await page.screenshot({ path: `${output}/1920-light-four.png` });
+  await page.reload();
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await expect(page.getByText('SYNTHETIC EXAMPLE', { exact: true })).toHaveCount(4);
+  results.push('Heikin-Ashi display, four-chart layout, light theme, and save/reload passed.');
+
+  await page.getByRole('button', { name: 'Import data', exact: true }).click();
+  await page.getByLabel('CSV file').setInputFiles({ name: 'browser-fixture.csv', mimeType: 'text/csv',
+    buffer: Buffer.from('timestamp,open,high,low,close,volume\n2025-01-01,10,12,9,11,100\n2025-01-02,11,13,10,12,200\n') });
+  await page.getByLabel('Symbol', { exact: true }).fill('BROWSERTEST');
+  await page.getByLabel('Timestamp timezone', { exact: true }).fill('UTC');
+  await page.getByRole('button', { name: 'Review import', exact: true }).click();
+  await expect(page.getByText('2 valid bars')).toBeVisible();
+  await page.getByRole('button', { name: 'Import dataset', exact: true }).click();
+  await expect(page.getByText('2 bars', { exact: true })).toBeVisible();
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  results.push('Real browser CSV file selection, mapping, preview, commit, chart selection, watchlist addition and autosave passed.');
+  await page.getByRole('button', { name: '1 chart layout', exact: true }).click();
+  await page.getByRole('button', { name: 'Switch to dark theme' }).click();
+  await page.getByRole('button', { name: 'BROWSERTEST', exact: true }).click();
+  await page.locator(`.dataset-picker [data-dataset-id="${dataset.id}"]`).click();
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  await expect(page.getByText('365 bars', { exact: true })).toBeVisible();
+  await page.screenshot({ path: `${output}/final-workspace.png` });
+  if (errors.length) throw new Error(errors.join('\n'));
+  await writeFile(`${output}/report.json`, JSON.stringify({ date: new Date().toISOString(), browser: await browser.version(), results, pageErrors: errors, status: 'passed' }, null, 2));
+  console.log(JSON.stringify({ status: 'passed', results }));
+} catch (error) {
+  await page.screenshot({ path: `${output}/failure.png` });
+  await writeFile(`${output}/report.json`, JSON.stringify({ date: new Date().toISOString(), results, pageErrors: errors, status: 'failed', error: error.message }, null, 2));
+  throw error;
+} finally { const current = await (await page.request.get(endpoint+'/workspaces/default')).json(); await page.request.put(endpoint+'/workspaces/default', { headers, data: { ...original, revision: current.revision } }); await browser.close(); }

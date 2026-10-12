@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-12T02:30:44.650Z",
+  "status": "passed",
+  "browser": "155.0.4283.45",
+  "results": [
+    "Local Monaco editor, typing, backend syntax diagnostics, literal parameter declarations, exact-source version save/restore, reload and source export passed."
+  ],
+  "pageErrors": [],
+  "remoteEditorRequests": [],
+  "limitations": [
+    "Worker execution and research integration are not part of this authoring check."
+  ]
+}

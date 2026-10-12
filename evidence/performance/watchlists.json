@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "recorded_at": "2026-10-12T03:30:23.791Z",
+  "hardware": {
+    "processor": "Apple M4 Pro",
+    "cores": 14,
+    "memory_gib": 48,
+    "platform": "macOS arm64"
+  },
+  "browser": "User-opened Google Chrome on macOS",
+  "workload": {
+    "watchlist_items": 1201,
+    "baseline_watchlist_items": 1,
+    "dataset_count": 2,
+    "bars_per_dataset": 365,
+    "data": "Synthetic fixture; 1199 identities deliberately have no dataset",
+    "panels": "One chart; data panel collapsed; Python editor not yet loaded",
+    "navigation": "Select large list; End, Enter to LAST, Home/PageDown/PageUp/arrows/Tab"
+  },
+  "selection_roundtrip_ms": 933,
+  "timing_scope": "Native select Down/Return plus accessibility observation, including automation; not render latency",
+  "memory": {
+    "baseline_display_mb": 102,
+    "after_navigation_display_mb": 96.8,
+    "scope": "Chrome selected-tab accessibility label reports Memory usage in rounded MB. These are two snapshots, not peak, isolated list allocation, or JavaScript heap. Chrome GC/timing may explain the lower second value; no memory saving is inferred."
+  },
+  "evidence": "../browser/chrome-keyboard-report.json"
+}

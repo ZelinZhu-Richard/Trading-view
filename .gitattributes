@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# JUnit retains the exact test output, including blank-line indentation.
+evidence/*.xml whitespace=-blank-at-eol

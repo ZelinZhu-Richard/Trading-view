@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-12T00:06:12.310575+00:00",
+  "status": "passed",
+  "provider": "Coinbase Exchange public API",
+  "instrument": "COINBASE:BTC-USD",
+  "dataset_id": "aa08d5dc5ebc772224932c08cd3c40369f59e7d95e40c6fcc3024db8b4ca3ae1",
+  "bars": 90,
+  "quote_timestamp": 1791763570,
+  "stream_quote_timestamp": 1791763571,
+  "checks": [
+    "Product discovery",
+    "Historical daily candles",
+    "Latest public ticker",
+    "Live public WebSocket quote and unsubscribe cleanup"
+  ],
+  "limitations": [
+    "No Alpaca or Alpha Vantage credentials used"
+  ]
+}

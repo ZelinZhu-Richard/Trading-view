@@ -1,0 +1,4376 @@
+{
+  "Contract": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version"
+    ],
+    "title": "Contract",
+    "type": "object"
+  },
+  "Instrument": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "maxLength": 160,
+        "minLength": 1,
+        "pattern": "^[\\w.:/\\-]+$",
+        "title": "Id",
+        "type": "string"
+      },
+      "symbol": {
+        "maxLength": 64,
+        "minLength": 1,
+        "title": "Symbol",
+        "type": "string"
+      },
+      "name": {
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "exchange": {
+        "title": "Exchange",
+        "type": "string"
+      },
+      "asset_class": {
+        "enum": [
+          "stock",
+          "etf",
+          "equity",
+          "crypto",
+          "forex",
+          "other"
+        ],
+        "title": "Asset Class",
+        "type": "string"
+      },
+      "base_currency": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Base Currency"
+      },
+      "quote_currency": {
+        "pattern": "^[A-Z]{3,12}$",
+        "title": "Quote Currency",
+        "type": "string"
+      },
+      "timezone": {
+        "title": "Timezone",
+        "type": "string"
+      },
+      "calendar": {
+        "default": "24/7",
+        "title": "Calendar",
+        "type": "string"
+      },
+      "session": {
+        "default": "regular",
+        "enum": [
+          "regular",
+          "provider-day",
+          "continuous"
+        ],
+        "title": "Session",
+        "type": "string"
+      },
+      "price_tick": {
+        "default": "0.01",
+        "title": "Price Tick",
+        "type": "string"
+      },
+      "quantity_step": {
+        "default": "1",
+        "title": "Quantity Step",
+        "type": "string"
+      },
+      "provider_symbols": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Provider Symbols",
+        "type": "object"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "symbol",
+      "name",
+      "exchange",
+      "asset_class",
+      "base_currency",
+      "quote_currency",
+      "timezone",
+      "calendar",
+      "session",
+      "price_tick",
+      "quantity_step",
+      "provider_symbols"
+    ],
+    "title": "Instrument",
+    "type": "object"
+  },
+  "Bar": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "start": {
+        "title": "Start",
+        "type": "integer"
+      },
+      "end": {
+        "title": "End",
+        "type": "integer"
+      },
+      "open": {
+        "exclusiveMinimum": 0,
+        "title": "Open",
+        "type": "number"
+      },
+      "high": {
+        "exclusiveMinimum": 0,
+        "title": "High",
+        "type": "number"
+      },
+      "low": {
+        "exclusiveMinimum": 0,
+        "title": "Low",
+        "type": "number"
+      },
+      "close": {
+        "exclusiveMinimum": 0,
+        "title": "Close",
+        "type": "number"
+      },
+      "volume": {
+        "anyOf": [
+          {
+            "minimum": 0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Volume"
+      },
+      "complete": {
+        "default": true,
+        "title": "Complete",
+        "type": "boolean"
+      },
+      "source": {
+        "title": "Source",
+        "type": "string"
+      },
+      "feed": {
+        "title": "Feed",
+        "type": "string"
+      },
+      "adjustment": {
+        "default": "raw",
+        "enum": [
+          "raw",
+          "split",
+          "total-return",
+          "unknown"
+        ],
+        "title": "Adjustment",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "start",
+      "end",
+      "open",
+      "high",
+      "low",
+      "close",
+      "volume",
+      "complete",
+      "source",
+      "feed",
+      "adjustment"
+    ],
+    "title": "Bar",
+    "type": "object"
+  },
+  "Quote": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "price": {
+        "exclusiveMinimum": 0,
+        "title": "Price",
+        "type": "number"
+      },
+      "timestamp": {
+        "title": "Timestamp",
+        "type": "integer"
+      },
+      "source": {
+        "title": "Source",
+        "type": "string"
+      },
+      "feed": {
+        "title": "Feed",
+        "type": "string"
+      },
+      "freshness": {
+        "enum": [
+          "live",
+          "delayed",
+          "historical",
+          "imported",
+          "stale",
+          "unavailable"
+        ],
+        "title": "Freshness",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "instrument_id",
+      "price",
+      "timestamp",
+      "source",
+      "feed",
+      "freshness"
+    ],
+    "title": "Quote",
+    "type": "object"
+  },
+  "ProviderCapabilities": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "markets": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Markets",
+        "type": "array"
+      },
+      "intervals": {
+        "items": {
+          "enum": [
+            "1m",
+            "5m",
+            "15m",
+            "30m",
+            "1h",
+            "4h",
+            "1d",
+            "1w",
+            "1mo"
+          ],
+          "type": "string"
+        },
+        "title": "Intervals",
+        "type": "array"
+      },
+      "streaming": {
+        "title": "Streaming",
+        "type": "boolean"
+      },
+      "requires_keys": {
+        "title": "Requires Keys",
+        "type": "boolean"
+      },
+      "history": {
+        "title": "History",
+        "type": "string"
+      },
+      "limitations": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Limitations",
+        "type": "array"
+      },
+      "status": {
+        "enum": [
+          "not-configured",
+          "available",
+          "connected",
+          "disconnected",
+          "throttled"
+        ],
+        "title": "Status",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "name",
+      "markets",
+      "intervals",
+      "streaming",
+      "requires_keys",
+      "history",
+      "limitations",
+      "status"
+    ],
+    "title": "ProviderCapabilities",
+    "type": "object"
+  },
+  "Dataset": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "hash": {
+        "title": "Hash",
+        "type": "string"
+      },
+      "instrument": {
+        "$ref": "#/$defs/Instrument"
+      },
+      "interval": {
+        "enum": [
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "4h",
+          "1d",
+          "1w",
+          "1mo"
+        ],
+        "title": "Interval",
+        "type": "string"
+      },
+      "source": {
+        "title": "Source",
+        "type": "string"
+      },
+      "feed": {
+        "title": "Feed",
+        "type": "string"
+      },
+      "adjustment": {
+        "enum": [
+          "raw",
+          "split",
+          "total-return",
+          "unknown"
+        ],
+        "title": "Adjustment",
+        "type": "string"
+      },
+      "created_at": {
+        "title": "Created At",
+        "type": "string"
+      },
+      "first_start": {
+        "title": "First Start",
+        "type": "integer"
+      },
+      "last_end": {
+        "title": "Last End",
+        "type": "integer"
+      },
+      "row_count": {
+        "title": "Row Count",
+        "type": "integer"
+      },
+      "limitations": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Limitations",
+        "type": "array"
+      },
+      "parent_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Parent Id"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "hash",
+      "instrument",
+      "interval",
+      "source",
+      "feed",
+      "adjustment",
+      "created_at",
+      "first_start",
+      "last_end",
+      "row_count",
+      "limitations",
+      "parent_id"
+    ],
+    "title": "Dataset",
+    "type": "object"
+  },
+  "CandleStatus": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "active": {
+        "default": false,
+        "title": "Active",
+        "type": "boolean"
+      },
+      "series_id": {
+        "title": "Series Id",
+        "type": "string"
+      },
+      "dataset": {
+        "$ref": "#/$defs/Dataset"
+      },
+      "status": {
+        "enum": [
+          "waiting",
+          "updating",
+          "current",
+          "catching-up",
+          "stale"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "message": {
+        "title": "Message",
+        "type": "string"
+      },
+      "last_success": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Last Success"
+      },
+      "next_check": {
+        "default": 0,
+        "title": "Next Check",
+        "type": "number"
+      },
+      "revised_history": {
+        "default": false,
+        "title": "Revised History",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "schema_version",
+      "active",
+      "series_id",
+      "dataset",
+      "status",
+      "message",
+      "last_success",
+      "next_check",
+      "revised_history"
+    ],
+    "title": "CandleStatus",
+    "type": "object"
+  },
+  "DatasetView": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "dataset": {
+        "$ref": "#/$defs/Dataset"
+      },
+      "bars": {
+        "items": {
+          "$ref": "#/$defs/Bar"
+        },
+        "title": "Bars",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "dataset",
+      "bars"
+    ],
+    "title": "DatasetView",
+    "type": "object"
+  },
+  "ImportRequest": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "csv_text": {
+        "maxLength": 30000000,
+        "title": "Csv Text",
+        "type": "string"
+      },
+      "instrument": {
+        "$ref": "#/$defs/Instrument"
+      },
+      "interval": {
+        "default": "1d",
+        "enum": [
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "4h",
+          "1d",
+          "1w",
+          "1mo"
+        ],
+        "title": "Interval",
+        "type": "string"
+      },
+      "timezone": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Timezone"
+      },
+      "timestamp_format": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Timestamp Format"
+      },
+      "columns": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Columns",
+        "type": "object"
+      },
+      "adjustment": {
+        "default": "raw",
+        "enum": [
+          "raw",
+          "split",
+          "total-return",
+          "unknown"
+        ],
+        "title": "Adjustment",
+        "type": "string"
+      },
+      "conflict_policy": {
+        "default": "reject",
+        "enum": [
+          "reject",
+          "first",
+          "last"
+        ],
+        "title": "Conflict Policy",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "csv_text",
+      "instrument",
+      "interval",
+      "timezone",
+      "timestamp_format",
+      "columns",
+      "adjustment",
+      "conflict_policy"
+    ],
+    "title": "ImportRequest",
+    "type": "object"
+  },
+  "ImportIssue": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "row": {
+        "title": "Row",
+        "type": "integer"
+      },
+      "message": {
+        "title": "Message",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "row",
+      "message"
+    ],
+    "title": "ImportIssue",
+    "type": "object"
+  },
+  "ImportPreview": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "token": {
+        "title": "Token",
+        "type": "string"
+      },
+      "columns": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Columns",
+        "type": "array"
+      },
+      "preview": {
+        "items": {
+          "$ref": "#/$defs/Bar"
+        },
+        "title": "Preview",
+        "type": "array"
+      },
+      "valid_rows": {
+        "title": "Valid Rows",
+        "type": "integer"
+      },
+      "invalid_rows": {
+        "title": "Invalid Rows",
+        "type": "integer"
+      },
+      "exact_duplicates": {
+        "title": "Exact Duplicates",
+        "type": "integer"
+      },
+      "conflicting_duplicates": {
+        "title": "Conflicting Duplicates",
+        "type": "integer"
+      },
+      "errors": {
+        "items": {
+          "$ref": "#/$defs/ImportIssue"
+        },
+        "title": "Errors",
+        "type": "array"
+      },
+      "warnings": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Warnings",
+        "type": "array"
+      },
+      "can_commit": {
+        "title": "Can Commit",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "schema_version",
+      "token",
+      "columns",
+      "preview",
+      "valid_rows",
+      "invalid_rows",
+      "exact_duplicates",
+      "conflicting_duplicates",
+      "errors",
+      "warnings",
+      "can_commit"
+    ],
+    "title": "ImportPreview",
+    "type": "object"
+  },
+  "Anchor": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "time": {
+        "maximum": 253402300799,
+        "minimum": -62135596800,
+        "title": "Time",
+        "type": "number"
+      },
+      "price": {
+        "exclusiveMinimum": 0,
+        "title": "Price",
+        "type": "number"
+      }
+    },
+    "required": [
+      "schema_version",
+      "time",
+      "price"
+    ],
+    "title": "Anchor",
+    "type": "object"
+  },
+  "Drawing": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "kind": {
+        "enum": [
+          "trend",
+          "ray",
+          "extended",
+          "horizontal",
+          "horizontal-ray",
+          "vertical",
+          "cross",
+          "parallel-channel",
+          "regression-channel",
+          "pitchfork",
+          "fib-retracement",
+          "fib-extension",
+          "rectangle",
+          "ellipse",
+          "triangle",
+          "brush",
+          "path",
+          "arrow",
+          "text",
+          "price-range",
+          "date-range",
+          "date-price-range",
+          "long-position",
+          "short-position"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "anchors": {
+        "items": {
+          "$ref": "#/$defs/Anchor"
+        },
+        "maxItems": 10000,
+        "minItems": 1,
+        "title": "Anchors",
+        "type": "array"
+      },
+      "color": {
+        "default": "#54b4df",
+        "pattern": "^#[0-9a-fA-F]{6}$",
+        "title": "Color",
+        "type": "string"
+      },
+      "opacity": {
+        "default": 1,
+        "maximum": 1,
+        "minimum": 0,
+        "title": "Opacity",
+        "type": "number"
+      },
+      "width": {
+        "default": 2,
+        "maximum": 8,
+        "minimum": 1,
+        "title": "Width",
+        "type": "integer"
+      },
+      "label": {
+        "default": "",
+        "maxLength": 1000,
+        "title": "Label",
+        "type": "string"
+      },
+      "levels": {
+        "items": {
+          "type": "number"
+        },
+        "maxItems": 30,
+        "title": "Levels",
+        "type": "array"
+      },
+      "visible": {
+        "default": true,
+        "title": "Visible",
+        "type": "boolean"
+      },
+      "locked": {
+        "default": false,
+        "title": "Locked",
+        "type": "boolean"
+      },
+      "quantity": {
+        "default": "1",
+        "title": "Quantity",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "kind",
+      "instrument_id",
+      "anchors",
+      "color",
+      "opacity",
+      "width",
+      "label",
+      "levels",
+      "visible",
+      "locked",
+      "quantity"
+    ],
+    "title": "Drawing",
+    "type": "object"
+  },
+  "DrawingMeasurementRequest": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "instrument": {
+        "$ref": "#/$defs/Instrument"
+      },
+      "drawings": {
+        "items": {
+          "$ref": "#/$defs/Drawing"
+        },
+        "maxItems": 1000,
+        "title": "Drawings",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "instrument",
+      "drawings"
+    ],
+    "title": "DrawingMeasurementRequest",
+    "type": "object"
+  },
+  "IndicatorInstance": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "definition_id": {
+        "title": "Definition Id",
+        "type": "string"
+      },
+      "parameters": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "title": "Parameters",
+        "type": "object"
+      },
+      "visible": {
+        "default": true,
+        "title": "Visible",
+        "type": "boolean"
+      },
+      "color": {
+        "default": "#5fa8ed",
+        "title": "Color",
+        "type": "string"
+      },
+      "width": {
+        "default": 2,
+        "maximum": 5,
+        "minimum": 1,
+        "title": "Width",
+        "type": "integer"
+      },
+      "pane": {
+        "default": 0,
+        "maximum": 50,
+        "minimum": 0,
+        "title": "Pane",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "definition_id",
+      "parameters",
+      "visible",
+      "color",
+      "width",
+      "pane"
+    ],
+    "title": "IndicatorInstance",
+    "type": "object"
+  },
+  "IndicatorParameter": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "default": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Default"
+      },
+      "kind": {
+        "enum": [
+          "integer",
+          "number",
+          "choice",
+          "boolean",
+          "timestamp",
+          "fixed"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "minimum": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Minimum"
+      },
+      "maximum": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Maximum"
+      },
+      "choices": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Choices",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "default",
+      "kind",
+      "minimum",
+      "maximum",
+      "choices"
+    ],
+    "title": "IndicatorParameter",
+    "type": "object"
+  },
+  "IndicatorOutput": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "pane": {
+        "title": "Pane",
+        "type": "string"
+      },
+      "units": {
+        "title": "Units",
+        "type": "string"
+      },
+      "plot_offset_bars": {
+        "default": 0,
+        "title": "Plot Offset Bars",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "pane",
+      "units",
+      "plot_offset_bars"
+    ],
+    "title": "IndicatorOutput",
+    "type": "object"
+  },
+  "IndicatorDefinition": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "category": {
+        "title": "Category",
+        "type": "string"
+      },
+      "contract_version": {
+        "title": "Contract Version",
+        "type": "string"
+      },
+      "parameters": {
+        "additionalProperties": {
+          "$ref": "#/$defs/IndicatorParameter"
+        },
+        "title": "Parameters",
+        "type": "object"
+      },
+      "outputs": {
+        "items": {
+          "$ref": "#/$defs/IndicatorOutput"
+        },
+        "title": "Outputs",
+        "type": "array"
+      },
+      "formula": {
+        "title": "Formula",
+        "type": "string"
+      },
+      "warmup": {
+        "title": "Warmup",
+        "type": "string"
+      },
+      "edge_cases": {
+        "title": "Edge Cases",
+        "type": "string"
+      },
+      "notes": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Notes",
+        "type": "array"
+      },
+      "source_urls": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Source Urls",
+        "type": "array"
+      },
+      "volume_required": {
+        "title": "Volume Required",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "name",
+      "category",
+      "contract_version",
+      "parameters",
+      "outputs",
+      "formula",
+      "warmup",
+      "edge_cases",
+      "notes",
+      "source_urls",
+      "volume_required"
+    ],
+    "title": "IndicatorDefinition",
+    "type": "object"
+  },
+  "IndicatorValues": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "output_id": {
+        "title": "Output Id",
+        "type": "string"
+      },
+      "values": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": "Values",
+        "type": "array"
+      },
+      "plot_offset_bars": {
+        "default": 0,
+        "title": "Plot Offset Bars",
+        "type": "integer"
+      },
+      "plot_times": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": "Plot Times",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "output_id",
+      "values",
+      "plot_offset_bars",
+      "plot_times"
+    ],
+    "title": "IndicatorValues",
+    "type": "object"
+  },
+  "IndicatorResult": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "instance_id": {
+        "title": "Instance Id",
+        "type": "string"
+      },
+      "definition_id": {
+        "title": "Definition Id",
+        "type": "string"
+      },
+      "status": {
+        "enum": [
+          "ready",
+          "disabled",
+          "error"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "message": {
+        "default": "",
+        "title": "Message",
+        "type": "string"
+      },
+      "lines": {
+        "items": {
+          "$ref": "#/$defs/IndicatorValues"
+        },
+        "title": "Lines",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "instance_id",
+      "definition_id",
+      "status",
+      "message",
+      "lines"
+    ],
+    "title": "IndicatorResult",
+    "type": "object"
+  },
+  "IndicatorRequest": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "dataset_id": {
+        "title": "Dataset Id",
+        "type": "string"
+      },
+      "instances": {
+        "items": {
+          "$ref": "#/$defs/IndicatorInstance"
+        },
+        "maxItems": 50,
+        "title": "Instances",
+        "type": "array"
+      },
+      "cutoff": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Cutoff"
+      }
+    },
+    "required": [
+      "schema_version",
+      "dataset_id",
+      "instances",
+      "cutoff"
+    ],
+    "title": "IndicatorRequest",
+    "type": "object"
+  },
+  "IndicatorResponse": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "dataset_id": {
+        "title": "Dataset Id",
+        "type": "string"
+      },
+      "contract_version": {
+        "title": "Contract Version",
+        "type": "string"
+      },
+      "times": {
+        "items": {
+          "type": "integer"
+        },
+        "title": "Times",
+        "type": "array"
+      },
+      "available_at": {
+        "items": {
+          "type": "integer"
+        },
+        "title": "Available At",
+        "type": "array"
+      },
+      "results": {
+        "items": {
+          "$ref": "#/$defs/IndicatorResult"
+        },
+        "title": "Results",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "dataset_id",
+      "contract_version",
+      "times",
+      "available_at",
+      "results"
+    ],
+    "title": "IndicatorResponse",
+    "type": "object"
+  },
+  "ChartState": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "dataset_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Dataset Id"
+      },
+      "kind": {
+        "default": "candlestick",
+        "enum": [
+          "candlestick",
+          "bar",
+          "line",
+          "area",
+          "baseline",
+          "heikin-ashi"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "scale": {
+        "default": "linear",
+        "enum": [
+          "linear",
+          "logarithmic",
+          "percentage"
+        ],
+        "title": "Scale",
+        "type": "string"
+      },
+      "timezone": {
+        "default": "UTC",
+        "title": "Timezone",
+        "type": "string"
+      },
+      "indicators": {
+        "items": {
+          "$ref": "#/$defs/IndicatorInstance"
+        },
+        "maxItems": 50,
+        "title": "Indicators",
+        "type": "array"
+      },
+      "drawings": {
+        "items": {
+          "$ref": "#/$defs/Drawing"
+        },
+        "title": "Drawings",
+        "type": "array"
+      },
+      "show_volume": {
+        "default": true,
+        "title": "Show Volume",
+        "type": "boolean"
+      },
+      "follow_live": {
+        "default": false,
+        "title": "Follow Live",
+        "type": "boolean"
+      },
+      "link_group": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": "main",
+        "title": "Link Group"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "dataset_id",
+      "kind",
+      "scale",
+      "timezone",
+      "indicators",
+      "drawings",
+      "show_volume",
+      "follow_live",
+      "link_group"
+    ],
+    "title": "ChartState",
+    "type": "object"
+  },
+  "WatchlistItem": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "instrument_id": {
+        "maxLength": 160,
+        "minLength": 1,
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "section": {
+        "default": "",
+        "maxLength": 100,
+        "title": "Section",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "instrument_id",
+      "section"
+    ],
+    "title": "WatchlistItem",
+    "type": "object"
+  },
+  "Watchlist": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "name": {
+        "maxLength": 100,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "items": {
+        "items": {
+          "$ref": "#/$defs/WatchlistItem"
+        },
+        "title": "Items",
+        "type": "array"
+      },
+      "sections": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Sections",
+        "type": "array"
+      },
+      "sort": {
+        "default": "manual",
+        "enum": [
+          "manual",
+          "symbol",
+          "last",
+          "change",
+          "changePercent"
+        ],
+        "title": "Sort",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "name",
+      "items",
+      "sections",
+      "sort"
+    ],
+    "title": "Watchlist",
+    "type": "object"
+  },
+  "Workspace": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "default": "default",
+        "title": "Id",
+        "type": "string"
+      },
+      "name": {
+        "default": "My workspace",
+        "title": "Name",
+        "type": "string"
+      },
+      "revision": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Revision",
+        "type": "integer"
+      },
+      "theme": {
+        "default": "dark",
+        "enum": [
+          "dark",
+          "light"
+        ],
+        "title": "Theme",
+        "type": "string"
+      },
+      "layout": {
+        "default": 1,
+        "enum": [
+          1,
+          2,
+          4
+        ],
+        "title": "Layout",
+        "type": "integer"
+      },
+      "charts": {
+        "items": {
+          "$ref": "#/$defs/ChartState"
+        },
+        "title": "Charts",
+        "type": "array"
+      },
+      "active_chart": {
+        "default": 0,
+        "maximum": 3,
+        "minimum": 0,
+        "title": "Active Chart",
+        "type": "integer"
+      },
+      "watchlists": {
+        "items": {
+          "$ref": "#/$defs/Watchlist"
+        },
+        "title": "Watchlists",
+        "type": "array"
+      },
+      "active_watchlist": {
+        "default": "main",
+        "title": "Active Watchlist",
+        "type": "string"
+      },
+      "sidebar_width": {
+        "default": 280,
+        "maximum": 600,
+        "minimum": 200,
+        "title": "Sidebar Width",
+        "type": "integer"
+      },
+      "bottom_height": {
+        "default": 250,
+        "maximum": 800,
+        "minimum": 100,
+        "title": "Bottom Height",
+        "type": "integer"
+      },
+      "sidebar_open": {
+        "default": true,
+        "title": "Sidebar Open",
+        "type": "boolean"
+      },
+      "bottom_open": {
+        "default": true,
+        "title": "Bottom Open",
+        "type": "boolean"
+      },
+      "link_symbol": {
+        "default": false,
+        "title": "Link Symbol",
+        "type": "boolean"
+      },
+      "link_interval": {
+        "default": false,
+        "title": "Link Interval",
+        "type": "boolean"
+      },
+      "link_crosshair": {
+        "default": true,
+        "title": "Link Crosshair",
+        "type": "boolean"
+      },
+      "link_range": {
+        "default": true,
+        "title": "Link Range",
+        "type": "boolean"
+      },
+      "indicator_templates": {
+        "additionalProperties": {
+          "items": {
+            "$ref": "#/$defs/IndicatorInstance"
+          },
+          "type": "array"
+        },
+        "title": "Indicator Templates",
+        "type": "object"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "name",
+      "revision",
+      "theme",
+      "layout",
+      "charts",
+      "active_chart",
+      "watchlists",
+      "active_watchlist",
+      "sidebar_width",
+      "bottom_height",
+      "sidebar_open",
+      "bottom_open",
+      "link_symbol",
+      "link_interval",
+      "link_crosshair",
+      "link_range",
+      "indicator_templates"
+    ],
+    "title": "Workspace",
+    "type": "object"
+  },
+  "WatchlistsDocument": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "workspace_revision": {
+        "minimum": 0,
+        "title": "Workspace Revision",
+        "type": "integer"
+      },
+      "watchlists": {
+        "items": {
+          "$ref": "#/$defs/Watchlist"
+        },
+        "title": "Watchlists",
+        "type": "array"
+      },
+      "active_watchlist": {
+        "title": "Active Watchlist",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "workspace_revision",
+      "watchlists",
+      "active_watchlist"
+    ],
+    "title": "WatchlistsDocument",
+    "type": "object"
+  },
+  "DrawingsDocument": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "workspace_revision": {
+        "minimum": 0,
+        "title": "Workspace Revision",
+        "type": "integer"
+      },
+      "drawings": {
+        "items": {
+          "$ref": "#/$defs/Drawing"
+        },
+        "title": "Drawings",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "workspace_revision",
+      "drawings"
+    ],
+    "title": "DrawingsDocument",
+    "type": "object"
+  },
+  "StrategyDefinition": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "name": {
+        "maxLength": 120,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "source": {
+        "maxLength": 500000,
+        "title": "Source",
+        "type": "string"
+      },
+      "kind": {
+        "enum": [
+          "strategy",
+          "indicator"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "revision": {
+        "default": 0,
+        "title": "Revision",
+        "type": "integer"
+      },
+      "parameters": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "title": "Parameters",
+        "type": "object"
+      },
+      "subscriptions": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Subscriptions",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "name",
+      "source",
+      "kind",
+      "revision",
+      "parameters",
+      "subscriptions"
+    ],
+    "title": "StrategyDefinition",
+    "type": "object"
+  },
+  "ScriptParameter": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "type": {
+        "enum": [
+          "int",
+          "float",
+          "bool",
+          "str"
+        ],
+        "title": "Type",
+        "type": "string"
+      },
+      "default": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "string"
+          },
+          {
+            "type": "boolean"
+          }
+        ],
+        "title": "Default"
+      },
+      "minimum": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Minimum"
+      },
+      "maximum": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Maximum"
+      },
+      "choices": {
+        "items": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "title": "Choices",
+        "type": "array"
+      },
+      "description": {
+        "default": "",
+        "title": "Description",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "type",
+      "default",
+      "minimum",
+      "maximum",
+      "choices",
+      "description"
+    ],
+    "title": "ScriptParameter",
+    "type": "object"
+  },
+  "ScriptDiagnostic": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "line": {
+        "title": "Line",
+        "type": "integer"
+      },
+      "column": {
+        "title": "Column",
+        "type": "integer"
+      },
+      "severity": {
+        "enum": [
+          "error",
+          "warning"
+        ],
+        "title": "Severity",
+        "type": "string"
+      },
+      "message": {
+        "title": "Message",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "line",
+      "column",
+      "severity",
+      "message"
+    ],
+    "title": "ScriptDiagnostic",
+    "type": "object"
+  },
+  "ScriptAnalysis": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "valid": {
+        "title": "Valid",
+        "type": "boolean"
+      },
+      "script_hash": {
+        "title": "Script Hash",
+        "type": "string"
+      },
+      "diagnostics": {
+        "items": {
+          "$ref": "#/$defs/ScriptDiagnostic"
+        },
+        "title": "Diagnostics",
+        "type": "array"
+      },
+      "parameters": {
+        "additionalProperties": {
+          "$ref": "#/$defs/ScriptParameter"
+        },
+        "title": "Parameters",
+        "type": "object"
+      },
+      "hooks": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Hooks",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "valid",
+      "script_hash",
+      "diagnostics",
+      "parameters",
+      "hooks"
+    ],
+    "title": "ScriptAnalysis",
+    "type": "object"
+  },
+  "AlertDefinition": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "revision": {
+        "default": 0,
+        "minimum": 0,
+        "title": "Revision",
+        "type": "integer"
+      },
+      "name": {
+        "maxLength": 100,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "dataset_id": {
+        "title": "Dataset Id",
+        "type": "string"
+      },
+      "field": {
+        "default": "close",
+        "enum": [
+          "open",
+          "high",
+          "low",
+          "close"
+        ],
+        "title": "Field",
+        "type": "string"
+      },
+      "indicator": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/IndicatorInstance"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "output_id": {
+        "default": "value",
+        "title": "Output Id",
+        "type": "string"
+      },
+      "condition": {
+        "default": "crosses_above",
+        "enum": [
+          "above",
+          "below",
+          "crosses_above",
+          "crosses_below"
+        ],
+        "title": "Condition",
+        "type": "string"
+      },
+      "threshold": {
+        "title": "Threshold",
+        "type": "number"
+      },
+      "recurring": {
+        "default": false,
+        "title": "Recurring",
+        "type": "boolean"
+      },
+      "enabled": {
+        "default": true,
+        "title": "Enabled",
+        "type": "boolean"
+      },
+      "completed_bars": {
+        "const": true,
+        "default": true,
+        "title": "Completed Bars",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "revision",
+      "name",
+      "dataset_id",
+      "field",
+      "indicator",
+      "output_id",
+      "condition",
+      "threshold",
+      "recurring",
+      "enabled",
+      "completed_bars"
+    ],
+    "title": "AlertDefinition",
+    "type": "object"
+  },
+  "AlertEvent": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "alert_id": {
+        "title": "Alert Id",
+        "type": "string"
+      },
+      "alert_name": {
+        "title": "Alert Name",
+        "type": "string"
+      },
+      "dataset_id": {
+        "title": "Dataset Id",
+        "type": "string"
+      },
+      "bar_end": {
+        "title": "Bar End",
+        "type": "integer"
+      },
+      "evaluated_at": {
+        "title": "Evaluated At",
+        "type": "string"
+      },
+      "value": {
+        "title": "Value",
+        "type": "number"
+      },
+      "threshold": {
+        "title": "Threshold",
+        "type": "number"
+      },
+      "condition": {
+        "title": "Condition",
+        "type": "string"
+      },
+      "source": {
+        "title": "Source",
+        "type": "string"
+      },
+      "feed": {
+        "title": "Feed",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "alert_id",
+      "alert_name",
+      "dataset_id",
+      "bar_end",
+      "evaluated_at",
+      "value",
+      "threshold",
+      "condition",
+      "source",
+      "feed"
+    ],
+    "title": "AlertEvent",
+    "type": "object"
+  },
+  "AlertState": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "last_end": {
+        "title": "Last End",
+        "type": "integer"
+      },
+      "previous": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Previous"
+      },
+      "fired": {
+        "title": "Fired",
+        "type": "boolean"
+      },
+      "last_dataset_id": {
+        "title": "Last Dataset Id",
+        "type": "string"
+      },
+      "message": {
+        "title": "Message",
+        "type": "string"
+      },
+      "updated_at": {
+        "title": "Updated At",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "last_end",
+      "previous",
+      "fired",
+      "last_dataset_id",
+      "message",
+      "updated_at"
+    ],
+    "title": "AlertState",
+    "type": "object"
+  },
+  "AlertServiceStatus": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "running": {
+        "title": "Running",
+        "type": "boolean"
+      },
+      "last_cycle": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Last Cycle"
+      },
+      "error": {
+        "title": "Error",
+        "type": "string"
+      },
+      "states": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AlertState"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "title": "States",
+        "type": "object"
+      },
+      "scope": {
+        "title": "Scope",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "running",
+      "last_cycle",
+      "error",
+      "states",
+      "scope"
+    ],
+    "title": "AlertServiceStatus",
+    "type": "object"
+  },
+  "ProviderConfig": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "api_key": {
+        "format": "password",
+        "title": "Api Key",
+        "type": "string",
+        "writeOnly": true
+      },
+      "secret_key": {
+        "anyOf": [
+          {
+            "format": "password",
+            "type": "string",
+            "writeOnly": true
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Secret Key"
+      }
+    },
+    "required": [
+      "schema_version",
+      "api_key",
+      "secret_key"
+    ],
+    "title": "ProviderConfig",
+    "type": "object"
+  },
+  "HistoryRequest": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "provider": {
+        "enum": [
+          "alpaca",
+          "coinbase",
+          "alpha-vantage"
+        ],
+        "title": "Provider",
+        "type": "string"
+      },
+      "instrument": {
+        "$ref": "#/$defs/Instrument"
+      },
+      "interval": {
+        "enum": [
+          "1m",
+          "5m",
+          "15m",
+          "30m",
+          "1h",
+          "4h",
+          "1d",
+          "1w",
+          "1mo"
+        ],
+        "title": "Interval",
+        "type": "string"
+      },
+      "start": {
+        "title": "Start",
+        "type": "integer"
+      },
+      "end": {
+        "title": "End",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "provider",
+      "instrument",
+      "interval",
+      "start",
+      "end"
+    ],
+    "title": "HistoryRequest",
+    "type": "object"
+  },
+  "ExecutionSettings": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "initial_capital": {
+        "default": "100000",
+        "title": "Initial Capital",
+        "type": "string"
+      },
+      "reporting_currency": {
+        "default": "USD",
+        "pattern": "^[A-Z]{3,12}$",
+        "title": "Reporting Currency",
+        "type": "string"
+      },
+      "fee_bps": {
+        "default": "0",
+        "title": "Fee Bps",
+        "type": "string"
+      },
+      "fee_per_order": {
+        "default": "0",
+        "title": "Fee Per Order",
+        "type": "string"
+      },
+      "slippage_bps": {
+        "default": "0",
+        "title": "Slippage Bps",
+        "type": "string"
+      },
+      "allow_short": {
+        "default": true,
+        "title": "Allow Short",
+        "type": "boolean"
+      },
+      "allow_fixture_data": {
+        "default": false,
+        "title": "Allow Fixture Data",
+        "type": "boolean"
+      },
+      "seed": {
+        "default": 0,
+        "title": "Seed",
+        "type": "integer"
+      },
+      "start": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Start"
+      },
+      "end": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "End"
+      },
+      "fx_max_age_seconds": {
+        "anyOf": [
+          {
+            "exclusiveMinimum": 0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Fx Max Age Seconds"
+      },
+      "corporate_action_coverage": {
+        "default": "unknown",
+        "enum": [
+          "unknown",
+          "supplied-complete",
+          "supplied-partial"
+        ],
+        "title": "Corporate Action Coverage",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "initial_capital",
+      "reporting_currency",
+      "fee_bps",
+      "fee_per_order",
+      "slippage_bps",
+      "allow_short",
+      "allow_fixture_data",
+      "seed",
+      "start",
+      "end",
+      "fx_max_age_seconds",
+      "corporate_action_coverage"
+    ],
+    "title": "ExecutionSettings",
+    "type": "object"
+  },
+  "OrderRequest": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "side": {
+        "enum": [
+          "buy",
+          "sell"
+        ],
+        "title": "Side",
+        "type": "string"
+      },
+      "quantity": {
+        "title": "Quantity",
+        "type": "string"
+      },
+      "kind": {
+        "default": "market",
+        "enum": [
+          "market",
+          "limit",
+          "stop",
+          "bracket"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "entry_kind": {
+        "default": "market",
+        "enum": [
+          "market",
+          "limit",
+          "stop"
+        ],
+        "title": "Entry Kind",
+        "type": "string"
+      },
+      "limit_price": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Limit Price"
+      },
+      "stop_price": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Stop Price"
+      },
+      "take_profit": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Take Profit"
+      },
+      "stop_loss": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Stop Loss"
+      },
+      "tag": {
+        "default": "",
+        "maxLength": 200,
+        "title": "Tag",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "instrument_id",
+      "side",
+      "quantity",
+      "kind",
+      "entry_kind",
+      "limit_price",
+      "stop_price",
+      "take_profit",
+      "stop_loss",
+      "tag"
+    ],
+    "title": "OrderRequest",
+    "type": "object"
+  },
+  "SimulationOrder": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "sequence": {
+        "title": "Sequence",
+        "type": "integer"
+      },
+      "request": {
+        "$ref": "#/$defs/OrderRequest"
+      },
+      "submitted_at": {
+        "title": "Submitted At",
+        "type": "integer"
+      },
+      "eligible_from": {
+        "title": "Eligible From",
+        "type": "integer"
+      },
+      "status": {
+        "default": "pending",
+        "enum": [
+          "pending",
+          "filled",
+          "cancelled",
+          "rejected"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Reason"
+      },
+      "parent_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Parent Id"
+      },
+      "sibling_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Sibling Id"
+      },
+      "activated_bar_start": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Activated Bar Start"
+      },
+      "activation_phase": {
+        "anyOf": [
+          {
+            "enum": [
+              "open",
+              "touch"
+            ],
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Activation Phase"
+      },
+      "completed_at": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Completed At"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "sequence",
+      "request",
+      "submitted_at",
+      "eligible_from",
+      "status",
+      "reason",
+      "parent_id",
+      "sibling_id",
+      "activated_bar_start",
+      "activation_phase",
+      "completed_at"
+    ],
+    "title": "SimulationOrder",
+    "type": "object"
+  },
+  "FXLeg": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "from_currency": {
+        "title": "From Currency",
+        "type": "string"
+      },
+      "to_currency": {
+        "title": "To Currency",
+        "type": "string"
+      },
+      "rate": {
+        "title": "Rate",
+        "type": "string"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "dataset_id": {
+        "title": "Dataset Id",
+        "type": "string"
+      },
+      "dataset_hash": {
+        "title": "Dataset Hash",
+        "type": "string"
+      },
+      "source": {
+        "title": "Source",
+        "type": "string"
+      },
+      "feed": {
+        "title": "Feed",
+        "type": "string"
+      },
+      "available_at": {
+        "title": "Available At",
+        "type": "integer"
+      },
+      "age_seconds": {
+        "title": "Age Seconds",
+        "type": "integer"
+      },
+      "inverse": {
+        "title": "Inverse",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "schema_version",
+      "from_currency",
+      "to_currency",
+      "rate",
+      "instrument_id",
+      "dataset_id",
+      "dataset_hash",
+      "source",
+      "feed",
+      "available_at",
+      "age_seconds",
+      "inverse"
+    ],
+    "title": "FXLeg",
+    "type": "object"
+  },
+  "FXConversion": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "at": {
+        "title": "At",
+        "type": "integer"
+      },
+      "from_currency": {
+        "title": "From Currency",
+        "type": "string"
+      },
+      "to_currency": {
+        "title": "To Currency",
+        "type": "string"
+      },
+      "rate": {
+        "title": "Rate",
+        "type": "string"
+      },
+      "legs": {
+        "items": {
+          "$ref": "#/$defs/FXLeg"
+        },
+        "title": "Legs",
+        "type": "array"
+      },
+      "purpose": {
+        "title": "Purpose",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "at",
+      "from_currency",
+      "to_currency",
+      "rate",
+      "legs",
+      "purpose"
+    ],
+    "title": "FXConversion",
+    "type": "object"
+  },
+  "Fill": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "order_id": {
+        "title": "Order Id",
+        "type": "string"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "side": {
+        "enum": [
+          "buy",
+          "sell"
+        ],
+        "title": "Side",
+        "type": "string"
+      },
+      "quantity": {
+        "title": "Quantity",
+        "type": "string"
+      },
+      "price": {
+        "title": "Price",
+        "type": "string"
+      },
+      "fee": {
+        "title": "Fee",
+        "type": "string"
+      },
+      "quote_currency": {
+        "title": "Quote Currency",
+        "type": "string"
+      },
+      "time": {
+        "title": "Time",
+        "type": "integer"
+      },
+      "bar_start": {
+        "title": "Bar Start",
+        "type": "integer"
+      },
+      "phase": {
+        "enum": [
+          "open",
+          "touch"
+        ],
+        "title": "Phase",
+        "type": "string"
+      },
+      "dataset_id": {
+        "title": "Dataset Id",
+        "type": "string"
+      },
+      "source": {
+        "title": "Source",
+        "type": "string"
+      },
+      "feed": {
+        "title": "Feed",
+        "type": "string"
+      },
+      "conversion": {
+        "$ref": "#/$defs/FXConversion"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "order_id",
+      "instrument_id",
+      "side",
+      "quantity",
+      "price",
+      "fee",
+      "quote_currency",
+      "time",
+      "bar_start",
+      "phase",
+      "dataset_id",
+      "source",
+      "feed",
+      "conversion"
+    ],
+    "title": "Fill",
+    "type": "object"
+  },
+  "Position": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "quote_currency": {
+        "title": "Quote Currency",
+        "type": "string"
+      },
+      "quantity": {
+        "default": "0",
+        "title": "Quantity",
+        "type": "string"
+      },
+      "average_price": {
+        "default": "0",
+        "title": "Average Price",
+        "type": "string"
+      },
+      "realized_gross": {
+        "default": "0",
+        "title": "Realized Gross",
+        "type": "string"
+      },
+      "fees": {
+        "default": "0",
+        "title": "Fees",
+        "type": "string"
+      },
+      "dividends": {
+        "default": "0",
+        "title": "Dividends",
+        "type": "string"
+      },
+      "short_collateral": {
+        "default": "0",
+        "title": "Short Collateral",
+        "type": "string"
+      },
+      "short_proceeds": {
+        "default": "0",
+        "title": "Short Proceeds",
+        "type": "string"
+      },
+      "last_price": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Last Price"
+      },
+      "last_price_time": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Last Price Time"
+      },
+      "unrealized": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Unrealized"
+      },
+      "market_value": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Market Value"
+      }
+    },
+    "required": [
+      "schema_version",
+      "instrument_id",
+      "quote_currency",
+      "quantity",
+      "average_price",
+      "realized_gross",
+      "fees",
+      "dividends",
+      "short_collateral",
+      "short_proceeds",
+      "last_price",
+      "last_price_time",
+      "unrealized",
+      "market_value"
+    ],
+    "title": "Position",
+    "type": "object"
+  },
+  "Trade": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "time": {
+        "title": "Time",
+        "type": "integer"
+      },
+      "direction": {
+        "enum": [
+          "long",
+          "short"
+        ],
+        "title": "Direction",
+        "type": "string"
+      },
+      "quantity": {
+        "title": "Quantity",
+        "type": "string"
+      },
+      "entry_price": {
+        "title": "Entry Price",
+        "type": "string"
+      },
+      "exit_price": {
+        "title": "Exit Price",
+        "type": "string"
+      },
+      "gross_pnl": {
+        "title": "Gross Pnl",
+        "type": "string"
+      },
+      "allocated_fees": {
+        "title": "Allocated Fees",
+        "type": "string"
+      },
+      "net_pnl": {
+        "title": "Net Pnl",
+        "type": "string"
+      },
+      "quote_currency": {
+        "title": "Quote Currency",
+        "type": "string"
+      },
+      "reporting_pnl": {
+        "title": "Reporting Pnl",
+        "type": "string"
+      },
+      "conversion": {
+        "$ref": "#/$defs/FXConversion"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "instrument_id",
+      "time",
+      "direction",
+      "quantity",
+      "entry_price",
+      "exit_price",
+      "gross_pnl",
+      "allocated_fees",
+      "net_pnl",
+      "quote_currency",
+      "reporting_pnl",
+      "conversion"
+    ],
+    "title": "Trade",
+    "type": "object"
+  },
+  "Portfolio": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "time": {
+        "title": "Time",
+        "type": "integer"
+      },
+      "reporting_currency": {
+        "title": "Reporting Currency",
+        "type": "string"
+      },
+      "cash": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Cash",
+        "type": "object"
+      },
+      "restricted_cash": {
+        "additionalProperties": {
+          "type": "string"
+        },
+        "title": "Restricted Cash",
+        "type": "object"
+      },
+      "positions": {
+        "items": {
+          "$ref": "#/$defs/Position"
+        },
+        "title": "Positions",
+        "type": "array"
+      },
+      "equity": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Equity"
+      },
+      "gross_exposure": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Gross Exposure"
+      },
+      "valuation_errors": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Valuation Errors",
+        "type": "array"
+      },
+      "conversions": {
+        "items": {
+          "$ref": "#/$defs/FXConversion"
+        },
+        "title": "Conversions",
+        "type": "array"
+      },
+      "insolvent": {
+        "default": false,
+        "title": "Insolvent",
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "schema_version",
+      "time",
+      "reporting_currency",
+      "cash",
+      "restricted_cash",
+      "positions",
+      "equity",
+      "gross_exposure",
+      "valuation_errors",
+      "conversions",
+      "insolvent"
+    ],
+    "title": "Portfolio",
+    "type": "object"
+  },
+  "CorporateAction": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "time": {
+        "title": "Time",
+        "type": "integer"
+      },
+      "kind": {
+        "enum": [
+          "split",
+          "dividend"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "value": {
+        "title": "Value",
+        "type": "string"
+      },
+      "source": {
+        "minLength": 1,
+        "title": "Source",
+        "type": "string"
+      }
+    },
+    "required": [
+      "schema_version",
+      "instrument_id",
+      "time",
+      "kind",
+      "value",
+      "source"
+    ],
+    "title": "CorporateAction",
+    "type": "object"
+  },
+  "EquityPoint": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "time": {
+        "title": "Time",
+        "type": "integer"
+      },
+      "equity": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Equity"
+      },
+      "gross_exposure": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Gross Exposure"
+      },
+      "drawdown": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Drawdown"
+      },
+      "valuation_errors": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Valuation Errors",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "time",
+      "equity",
+      "gross_exposure",
+      "drawdown",
+      "valuation_errors"
+    ],
+    "title": "EquityPoint",
+    "type": "object"
+  },
+  "Metric": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "value": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Value"
+      },
+      "unit": {
+        "title": "Unit",
+        "type": "string"
+      },
+      "convention": {
+        "title": "Convention",
+        "type": "string"
+      },
+      "undefined_reason": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Undefined Reason"
+      }
+    },
+    "required": [
+      "schema_version",
+      "value",
+      "unit",
+      "convention",
+      "undefined_reason"
+    ],
+    "title": "Metric",
+    "type": "object"
+  },
+  "Contribution": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "instrument_id": {
+        "title": "Instrument Id",
+        "type": "string"
+      },
+      "quote_currency": {
+        "title": "Quote Currency",
+        "type": "string"
+      },
+      "realized_gross": {
+        "title": "Realized Gross",
+        "type": "string"
+      },
+      "unrealized": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Unrealized"
+      },
+      "fees": {
+        "title": "Fees",
+        "type": "string"
+      },
+      "dividends": {
+        "title": "Dividends",
+        "type": "string"
+      },
+      "reporting_pnl": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Reporting Pnl"
+      }
+    },
+    "required": [
+      "schema_version",
+      "instrument_id",
+      "quote_currency",
+      "realized_gross",
+      "unrealized",
+      "fees",
+      "dividends",
+      "reporting_pnl"
+    ],
+    "title": "Contribution",
+    "type": "object"
+  },
+  "ResearchResult": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "engine_version": {
+        "title": "Engine Version",
+        "type": "string"
+      },
+      "settings": {
+        "$ref": "#/$defs/ExecutionSettings"
+      },
+      "final_portfolio": {
+        "$ref": "#/$defs/Portfolio"
+      },
+      "orders": {
+        "items": {
+          "$ref": "#/$defs/SimulationOrder"
+        },
+        "title": "Orders",
+        "type": "array"
+      },
+      "fills": {
+        "items": {
+          "$ref": "#/$defs/Fill"
+        },
+        "title": "Fills",
+        "type": "array"
+      },
+      "trades": {
+        "items": {
+          "$ref": "#/$defs/Trade"
+        },
+        "title": "Trades",
+        "type": "array"
+      },
+      "equity": {
+        "items": {
+          "$ref": "#/$defs/EquityPoint"
+        },
+        "title": "Equity",
+        "type": "array"
+      },
+      "metrics": {
+        "additionalProperties": {
+          "$ref": "#/$defs/Metric"
+        },
+        "title": "Metrics",
+        "type": "object"
+      },
+      "contributions": {
+        "items": {
+          "$ref": "#/$defs/Contribution"
+        },
+        "title": "Contributions",
+        "type": "array"
+      },
+      "currency_translation": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Currency Translation"
+      },
+      "conversions": {
+        "items": {
+          "$ref": "#/$defs/FXConversion"
+        },
+        "title": "Conversions",
+        "type": "array"
+      },
+      "corporate_actions": {
+        "items": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "title": "Corporate Actions",
+        "type": "array"
+      },
+      "logs": {
+        "items": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "title": "Logs",
+        "type": "array"
+      },
+      "plots": {
+        "items": {
+          "additionalProperties": true,
+          "type": "object"
+        },
+        "title": "Plots",
+        "type": "array"
+      },
+      "limitations": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Limitations",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "engine_version",
+      "settings",
+      "final_portfolio",
+      "orders",
+      "fills",
+      "trades",
+      "equity",
+      "metrics",
+      "contributions",
+      "currency_translation",
+      "conversions",
+      "corporate_actions",
+      "logs",
+      "plots",
+      "limitations"
+    ],
+    "title": "ResearchResult",
+    "type": "object"
+  },
+  "WorkerLimits": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "deadline_seconds": {
+        "default": 300,
+        "maximum": 3600,
+        "minimum": 1,
+        "title": "Deadline Seconds",
+        "type": "integer"
+      },
+      "memory_mb": {
+        "default": 1024,
+        "maximum": 8192,
+        "minimum": 128,
+        "title": "Memory Mb",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "deadline_seconds",
+      "memory_mb"
+    ],
+    "title": "WorkerLimits",
+    "type": "object"
+  },
+  "ResearchRequest": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "name": {
+        "default": "Research run",
+        "maxLength": 120,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "script": {
+        "$ref": "#/$defs/StrategyDefinition"
+      },
+      "dataset_ids": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 100,
+        "minItems": 1,
+        "title": "Dataset Ids",
+        "type": "array"
+      },
+      "parameters": {
+        "additionalProperties": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "title": "Parameters",
+        "type": "object"
+      },
+      "settings": {
+        "$ref": "#/$defs/ExecutionSettings"
+      },
+      "actions": {
+        "items": {
+          "$ref": "#/$defs/CorporateAction"
+        },
+        "maxItems": 100000,
+        "title": "Actions",
+        "type": "array"
+      },
+      "limits": {
+        "$ref": "#/$defs/WorkerLimits"
+      }
+    },
+    "required": [
+      "schema_version",
+      "name",
+      "script",
+      "dataset_ids",
+      "parameters",
+      "settings",
+      "actions",
+      "limits"
+    ],
+    "title": "ResearchRequest",
+    "type": "object"
+  },
+  "ResearchJob": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "revision": {
+        "default": 0,
+        "title": "Revision",
+        "type": "integer"
+      },
+      "status": {
+        "enum": [
+          "queued",
+          "running",
+          "completed",
+          "failed",
+          "cancelled",
+          "interrupted"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "created_at": {
+        "title": "Created At",
+        "type": "string"
+      },
+      "started_at": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Started At"
+      },
+      "finished_at": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Finished At"
+      },
+      "snapshot_hash": {
+        "title": "Snapshot Hash",
+        "type": "string"
+      },
+      "result_hash": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Result Hash"
+      },
+      "progress": {
+        "default": 0,
+        "title": "Progress",
+        "type": "number"
+      },
+      "completed_events": {
+        "default": 0,
+        "title": "Completed Events",
+        "type": "integer"
+      },
+      "total_events": {
+        "default": 0,
+        "title": "Total Events",
+        "type": "integer"
+      },
+      "elapsed_seconds": {
+        "default": 0,
+        "title": "Elapsed Seconds",
+        "type": "number"
+      },
+      "peak_memory_bytes": {
+        "default": 0,
+        "title": "Peak Memory Bytes",
+        "type": "integer"
+      },
+      "error": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Error"
+      },
+      "limits": {
+        "$ref": "#/$defs/WorkerLimits"
+      }
+    },
+    "required": [
+      "schema_version",
+      "id",
+      "name",
+      "revision",
+      "status",
+      "created_at",
+      "started_at",
+      "finished_at",
+      "snapshot_hash",
+      "result_hash",
+      "progress",
+      "completed_events",
+      "total_events",
+      "elapsed_seconds",
+      "peak_memory_bytes",
+      "error",
+      "limits"
+    ],
+    "title": "ResearchJob",
+    "type": "object"
+  },
+  "AccountRequest": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "name": {
+        "maxLength": 120,
+        "minLength": 1,
+        "title": "Name",
+        "type": "string"
+      },
+      "mode": {
+        "enum": [
+          "replay",
+          "paper"
+        ],
+        "title": "Mode",
+        "type": "string"
+      },
+      "dataset_ids": {
+        "items": {
+          "type": "string"
+        },
+        "maxItems": 100,
+        "minItems": 1,
+        "title": "Dataset Ids",
+        "type": "array"
+      },
+      "settings": {
+        "$ref": "#/$defs/ExecutionSettings"
+      },
+      "actions": {
+        "items": {
+          "$ref": "#/$defs/CorporateAction"
+        },
+        "maxItems": 100000,
+        "title": "Actions",
+        "type": "array"
+      },
+      "cursor": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Cursor"
+      }
+    },
+    "required": [
+      "schema_version",
+      "name",
+      "mode",
+      "dataset_ids",
+      "settings",
+      "actions",
+      "cursor"
+    ],
+    "title": "AccountRequest",
+    "type": "object"
+  },
+  "AccountCommand": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "time": {
+        "title": "Time",
+        "type": "integer"
+      },
+      "kind": {
+        "enum": [
+          "order",
+          "cancel"
+        ],
+        "title": "Kind",
+        "type": "string"
+      },
+      "order": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/OrderRequest"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "order_id": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Order Id"
+      }
+    },
+    "required": [
+      "schema_version",
+      "time",
+      "kind",
+      "order",
+      "order_id"
+    ],
+    "title": "AccountCommand",
+    "type": "object"
+  },
+  "PaperAccount": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "paused": {
+        "default": false,
+        "title": "Paused",
+        "type": "boolean"
+      },
+      "id": {
+        "title": "Id",
+        "type": "string"
+      },
+      "name": {
+        "title": "Name",
+        "type": "string"
+      },
+      "mode": {
+        "enum": [
+          "replay",
+          "paper"
+        ],
+        "title": "Mode",
+        "type": "string"
+      },
+      "revision": {
+        "default": 0,
+        "title": "Revision",
+        "type": "integer"
+      },
+      "dataset_ids": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Dataset Ids",
+        "type": "array"
+      },
+      "settings": {
+        "$ref": "#/$defs/ExecutionSettings"
+      },
+      "actions": {
+        "items": {
+          "$ref": "#/$defs/CorporateAction"
+        },
+        "title": "Actions",
+        "type": "array"
+      },
+      "commands": {
+        "items": {
+          "$ref": "#/$defs/AccountCommand"
+        },
+        "title": "Commands",
+        "type": "array"
+      },
+      "cursor": {
+        "title": "Cursor",
+        "type": "integer"
+      },
+      "created_at": {
+        "title": "Created At",
+        "type": "string"
+      },
+      "error": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Error"
+      }
+    },
+    "required": [
+      "schema_version",
+      "paused",
+      "id",
+      "name",
+      "mode",
+      "revision",
+      "dataset_ids",
+      "settings",
+      "actions",
+      "commands",
+      "cursor",
+      "created_at",
+      "error"
+    ],
+    "title": "PaperAccount",
+    "type": "object"
+  },
+  "AccountView": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "service_error": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Service Error"
+      },
+      "account": {
+        "$ref": "#/$defs/PaperAccount"
+      },
+      "datasets": {
+        "items": {
+          "$ref": "#/$defs/Dataset"
+        },
+        "title": "Datasets",
+        "type": "array"
+      },
+      "portfolio": {
+        "$ref": "#/$defs/Portfolio"
+      },
+      "orders": {
+        "items": {
+          "$ref": "#/$defs/SimulationOrder"
+        },
+        "title": "Orders",
+        "type": "array"
+      },
+      "fills": {
+        "items": {
+          "$ref": "#/$defs/Fill"
+        },
+        "title": "Fills",
+        "type": "array"
+      },
+      "trades": {
+        "items": {
+          "$ref": "#/$defs/Trade"
+        },
+        "title": "Trades",
+        "type": "array"
+      },
+      "next_time": {
+        "anyOf": [
+          {
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Next Time"
+      },
+      "first_time": {
+        "title": "First Time",
+        "type": "integer"
+      },
+      "last_time": {
+        "title": "Last Time",
+        "type": "integer"
+      },
+      "completion_times": {
+        "items": {
+          "type": "integer"
+        },
+        "title": "Completion Times",
+        "type": "array"
+      }
+    },
+    "required": [
+      "schema_version",
+      "service_error",
+      "account",
+      "datasets",
+      "portfolio",
+      "orders",
+      "fills",
+      "trades",
+      "next_time",
+      "first_time",
+      "last_time",
+      "completion_times"
+    ],
+    "title": "AccountView",
+    "type": "object"
+  },
+  "AccountSeek": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "time": {
+        "title": "Time",
+        "type": "integer"
+      },
+      "revision": {
+        "title": "Revision",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "time",
+      "revision"
+    ],
+    "title": "AccountSeek",
+    "type": "object"
+  },
+  "AccountOrder": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "order": {
+        "$ref": "#/$defs/OrderRequest"
+      },
+      "revision": {
+        "title": "Revision",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "order",
+      "revision"
+    ],
+    "title": "AccountOrder",
+    "type": "object"
+  },
+  "AccountCancel": {
+    "additionalProperties": false,
+    "properties": {
+      "schema_version": {
+        "const": 1,
+        "default": 1,
+        "title": "Schema Version",
+        "type": "integer"
+      },
+      "order_id": {
+        "title": "Order Id",
+        "type": "string"
+      },
+      "revision": {
+        "title": "Revision",
+        "type": "integer"
+      }
+    },
+    "required": [
+      "schema_version",
+      "order_id",
+      "revision"
+    ],
+    "title": "AccountCancel",
+    "type": "object"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "checked_at": "2026-10-12T03:41:07Z",
+  "goal_status": "blocked",
+  "previous_turn_classification": "progress",
+  "this_turn_classification": "External-gate audit; no additional implementation or executable verification can resolve the two remaining gates in this session",
+  "remaining": [
+    {
+      "requirement": "Windows local operation",
+      "state": "unverified",
+      "external_condition": "User reports no Windows machine; current host is macOS",
+      "preparation": "docs/windows-verification.md"
+    },
+    {
+      "requirement": "Actual Alpaca IEX trade delivery",
+      "state": "unverified",
+      "external_condition": "No actual trade in the authenticated 20-second observation",
+      "evidence": "evidence/configured-providers.json",
+      "next_check": "uv run python scripts/verify-configured-providers.py --stream-only"
+    }
+  ],
+  "completion": "Not achieved; no mandatory gate waived except further Edge checks explicitly waived by user",
+  "blocked_audit": {
+    "consecutive_goal_turns_with_same_conditions": 3,
+    "turns": [
+      "Chrome verification completed; Windows and actual Alpaca trade delivery remained open",
+      "Windows checklist and stricter stream verifier completed; actual authenticated stream still delivered no trade",
+      "Current-state audit confirms only those external gates remain; macOS host and no Windows execution evidence; IEX outside published session hours"
+    ],
+    "independent_work": "Complete for presently available local environment; no claim of full completion"
+  },
+  "market_schedule": {
+    "source": "https://www.iex.io/resources/trading/trading-hours-holidays",
+    "accessed_at": "2026-10-12T03:41:07Z",
+    "current_local_time": "2026-10-11 23:41:07 America/New_York",
+    "published_equities_hours_et": {
+      "pre_market": "08:00\u201309:30",
+      "regular": "09:30\u201316:00",
+      "post_market": "16:00\u201317:00"
+    },
+    "next_regular_session_inferred": "2026-10-12 09:30 America/New_York / 13:30 UTC",
+    "limitation": "Derived from published hours and the 2026 holiday list, not a guarantee of live trade receipt. No repeated polling or scheduled automation was started."
+  }
+}

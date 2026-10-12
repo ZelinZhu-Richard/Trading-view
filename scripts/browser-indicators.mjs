@@ -1,0 +1,70 @@
+import { browserExecutable, evidenceDirectory } from './browser-runtime.mjs';
+import { chromium, expect } from '@playwright/test';
+import { mkdir, writeFile } from 'node:fs/promises';
+const output = evidenceDirectory;
+await mkdir(output, { recursive: true });
+const browser = await chromium.launch({ executablePath: browserExecutable, headless: true });
+const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+const page = await context.newPage();
+page.setDefaultTimeout(12000);
+const errors = [], results = [];
+page.on('pageerror', error => errors.push(error.message));
+const original = await (await context.request.get('http://127.0.0.1:8000/api/workspaces/default')).json();
+const template = `Browser indicators ${Date.now()}`;
+const indicators = ['Exponential moving average', 'Relative strength index', 'MACD', 'Ichimoku cloud'];
+try {
+  await page.goto('http://127.0.0.1:5173/');
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Indicators', exact: true }).click();
+  await expect(page.locator('.indicator-catalog>button')).toHaveCount(42);
+  for (const name of indicators) {
+    await page.getByLabel('Search indicators', { exact: true }).fill(name);
+    await page.locator('.indicator-catalog>button').first().click();
+    if (name === indicators[0]) await page.getByLabel('length', { exact: true }).fill('21');
+    await page.getByRole('button', { name: 'Add study', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Update study', exact: true })).toBeVisible();
+  }
+  await page.getByLabel('Indicator template name', { exact: true }).fill(template);
+  await page.getByRole('button', { name: 'Save template', exact: true }).click();
+  await page.getByRole('button', { name: `Apply ${template}`, exact: true }).click();
+  await page.getByRole('button', { name: 'Hide Exponential moving average', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Show Exponential moving average', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Show Exponential moving average', exact: true }).click();
+  await page.getByRole('button', { name: 'Close indicators', exact: true }).click();
+  await expect(page.locator('.study-readouts')).toContainText('Exponential moving average');
+  await expect(page.locator('.study-readouts')).not.toContainText('Calculating');
+  await expect(page.locator('.study-readouts')).not.toContainText('Error');
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  await page.screenshot({ path: `${output}/indicators-dark.png` });
+  await page.reload();
+  await expect(page.locator('.study-readouts')).toContainText('Exponential moving average');
+  await expect(page.locator('.study-readouts')).not.toContainText('Calculating');
+  await page.getByRole('button', { name: 'Indicators', exact: true }).click();
+  await expect(page.getByRole('button', { name: `Apply ${template}`, exact: true })).toBeVisible();
+  await page.locator('.study-name').filter({ hasText: 'Exponential moving average' }).click();
+  await expect(page.getByLabel('length', { exact: true })).toHaveValue('21');
+  await page.getByLabel('Line width', { exact: true }).fill('3');
+  await page.getByRole('button', { name: 'Update study', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Update study', exact: true })).toBeEnabled();
+  await page.screenshot({ path: `${output}/indicator-settings.png` });
+  await page.getByRole('button', { name: 'Remove Exponential moving average', exact: true }).click();
+  await expect(page.locator('.study-name').filter({ hasText: 'Exponential moving average' })).toHaveCount(0);
+  await page.getByRole('button', { name: 'Close indicators', exact: true }).click();
+  await expect(page.getByText('Saved locally', { exact: true })).toBeVisible();
+  results.push('42-study library, parameter edit, price overlays, separate panes, visibility, template save/apply, reload persistence, style edit and removal passed.');
+  if (errors.length) throw new Error(errors.join('\n'));
+  await writeFile(`${output}/indicators-report.json`, JSON.stringify({ date: new Date().toISOString(), browser: await browser.version(), status: 'passed', results, pageErrors: errors }, null, 2));
+  console.log(JSON.stringify({ status: 'passed', results }));
+} catch (error) {
+  await page.screenshot({ path: `${output}/indicators-failure.png` });
+  await writeFile(`${output}/indicators-report.json`, JSON.stringify({ date: new Date().toISOString(), status: 'failed', error: error.message, results, pageErrors: errors }, null, 2));
+  throw error;
+} finally {
+  await page.close();
+  const current = await (await context.request.get('http://127.0.0.1:8000/api/workspaces/default')).json();
+  current.charts[original.active_chart].indicators = original.charts[original.active_chart].indicators;
+  delete current.indicator_templates[template];
+  const restored = await context.request.put('http://127.0.0.1:8000/api/workspaces/default', { headers: { 'X-Workbench-Request': '1' }, data: current });
+  if (!restored.ok()) throw new Error('Could not restore indicator verification changes: ' + await restored.text());
+  await browser.close();
+}

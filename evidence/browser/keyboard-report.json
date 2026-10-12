@@ -1,0 +1,60 @@
+{
+  "date": "2026-10-12T03:04:49.790Z",
+  "browser": "Codex in-app browser on macOS",
+  "scope": "Built frontend, isolated credential-free service copy on port 8001",
+  "status": "passed",
+  "checks": [
+    "Native keyboard opens seven dialog types; Escape restores the opening control",
+    "Tab from drawing-dialog close to type then Create drawing",
+    "Create trend drawing without pointer placement, rename and edit anchor price to 112.25, save and reopen",
+    "Visible focus ring in dark and light themes",
+    "Chart can receive keyboard focus; plus/right and Home controls exercised"
+  ],
+  "dialogs": [
+    {
+      "control": "Drawing objects",
+      "opened": true,
+      "focusRestored": true
+    },
+    {
+      "control": "Indicators",
+      "opened": true,
+      "focused": "The focused UI element is 43 button Indicators"
+    },
+    {
+      "control": "Local alerts",
+      "opened": true,
+      "focused": "The focused UI element is 54 button Local alerts"
+    },
+    {
+      "control": "Connect data source",
+      "opened": true,
+      "focused": "The focused UI element is 56 button Connect data source"
+    },
+    {
+      "control": "Import data",
+      "opened": true,
+      "focused": "The focused UI element is 58 button Import data"
+    },
+    {
+      "control": "New account",
+      "opened": true,
+      "focused": "The focused UI element is 139 button New account"
+    },
+    {
+      "control": "Run settings",
+      "opened": true,
+      "focused": "The focused UI element is 131 button Run settings"
+    }
+  ],
+  "screenshots": [
+    "keyboard-focus.png",
+    "keyboard-drawing.png",
+    "keyboard-chart.png",
+    "keyboard-light.png"
+  ],
+  "limitations": [
+    "Full keyboard authoring/replay/research workflow and Chrome/Edge repetition are still pending",
+    "Screenshots use the in-app default 1280x720 viewport"
+  ]
+}

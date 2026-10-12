@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "mapped_rows": 420,
+  "source_sha256": "2b172533cb5ad41416705768e03e5680c777d03e16981095350167bf1ab833c5",
+  "requirement_statuses": {
+    "verified": 362,
+    "partial": 9,
+    "excluded": 6,
+    "informational": 43
+  },
+  "scope": "Source coverage, exact text and existing evidence paths; not whole-goal acceptance"
+}

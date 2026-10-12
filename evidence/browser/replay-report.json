@@ -1,0 +1,198 @@
+{
+  "status": "passed",
+  "date": "2026-10-12T01:56:20.022Z",
+  "browser": "155.0.8059.39",
+  "accountId": "167a99d7-2558-4bb6-a5ca-28885951d7e0",
+  "jobId": "b96a4d7d-a92b-48ab-958a-2b5d1b34560c",
+  "dataChecks": [
+    {
+      "cutoff": 1736121600,
+      "count": 5,
+      "maxEnd": 1736121600
+    },
+    {
+      "cutoff": 1736121600,
+      "count": 5,
+      "maxEnd": 1736121600
+    },
+    {
+      "cutoff": 1736121600,
+      "count": 5,
+      "maxEnd": 1736121600
+    },
+    {
+      "cutoff": 1736121600,
+      "count": 5,
+      "maxEnd": 1736121600
+    },
+    {
+      "cutoff": 1736208000,
+      "count": 6,
+      "maxEnd": 1736208000
+    },
+    {
+      "cutoff": 1736208000,
+      "count": 6,
+      "maxEnd": 1736208000
+    },
+    {
+      "cutoff": 1736208000,
+      "count": 6,
+      "maxEnd": 1736208000
+    },
+    {
+      "cutoff": 1736208000,
+      "count": 6,
+      "maxEnd": 1736208000
+    },
+    {
+      "cutoff": 1736294400,
+      "count": 7,
+      "maxEnd": 1736294400
+    },
+    {
+      "cutoff": 1736294400,
+      "count": 7,
+      "maxEnd": 1736294400
+    },
+    {
+      "cutoff": 1736294400,
+      "count": 7,
+      "maxEnd": 1736294400
+    },
+    {
+      "cutoff": 1736294400,
+      "count": 7,
+      "maxEnd": 1736294400
+    },
+    {
+      "cutoff": 1735862400,
+      "count": 2,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "count": 2,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "count": 2,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "count": 2,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "count": 2,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "count": 2,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "count": 2,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "count": 2,
+      "maxEnd": 1735862400
+    }
+  ],
+  "studyChecks": [
+    {
+      "cutoff": 1736121600,
+      "maxEnd": 1736121600
+    },
+    {
+      "cutoff": 1736121600,
+      "maxEnd": 1736121600
+    },
+    {
+      "cutoff": 1736121600,
+      "maxEnd": 1736121600
+    },
+    {
+      "cutoff": 1736121600,
+      "maxEnd": 1736121600
+    },
+    {
+      "cutoff": 1736208000,
+      "maxEnd": 1736208000
+    },
+    {
+      "cutoff": 1736208000,
+      "maxEnd": 1736208000
+    },
+    {
+      "cutoff": 1736208000,
+      "maxEnd": 1736208000
+    },
+    {
+      "cutoff": 1736208000,
+      "maxEnd": 1736208000
+    },
+    {
+      "cutoff": 1736294400,
+      "maxEnd": 1736294400
+    },
+    {
+      "cutoff": 1736294400,
+      "maxEnd": 1736294400
+    },
+    {
+      "cutoff": 1736294400,
+      "maxEnd": 1736294400
+    },
+    {
+      "cutoff": 1736294400,
+      "maxEnd": 1736294400
+    },
+    {
+      "cutoff": 1735862400,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "maxEnd": 1735862400
+    },
+    {
+      "cutoff": 1735862400,
+      "maxEnd": 1735862400
+    }
+  ],
+  "pageErrors": [],
+  "results": [
+    "Four-chart causal cutoff, shared SMA cutoff, manual next-open fill, step/play/pause/speed, backward reset, strategy run capped at cursor, saved account reopen and exit replay passed."
+  ],
+  "limitations": [
+    "Synthetic prices; current-market paper refresh has separate backend evidence and is not exercised by this browser check."
+  ]
+}

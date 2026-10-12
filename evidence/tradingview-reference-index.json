@@ -1,0 +1,3019 @@
+{
+  "bundle": "tradingview-reference.json",
+  "records": [
+    {
+      "evidence_id": "ev_00ddcb67e21dc6f348c2f0e2e5154a13bab69ae436ddbccd00a24421381c305f",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:45:18.102Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_00ddcb67e21dc6f348c2f0e2e5154a13bab69ae436ddbccd00a24421381c305f.png",
+      "sha256": "56d3a99eda4c2c802a8d10a57f5cde4e8aa35f69c5cf34d06450ac77e5aebee4"
+    },
+    {
+      "evidence_id": "ev_113428d25a861996a9fb434797af8340279393fbb738c761ee79f0e6856042df",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:51:03.489Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 486,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 714,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 36,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 378,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 19,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_11ccd2b30f5fb2bc12d659734552d56226bf25878a3e341c37360c19ff0b2fbd",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:40:59.623Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 509,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 707,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 356,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 16,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_1256f775bc7f71c9746dc2f7007579b719c6d25ad8d409863a2a2685de148ff9",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:50:46.178Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_1256f775bc7f71c9746dc2f7007579b719c6d25ad8d409863a2a2685de148ff9.png",
+      "sha256": "edcfb9749f0d8f1bba0a37d3e6a63fbbf4abf483fa01c9d91b9cc7cb07bf4f8e"
+    },
+    {
+      "evidence_id": "ev_22b4fe033e82f4e8af19a532922fcdb653a3a7848aadf242c6457d4e78d78c16",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:50:35.166Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 486,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 707,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 36,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 371,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 18,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_29f2a913f372d7bb9ae221a9cd7bc7fd60cadb5c1429936be735b9243193f670",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:44:09.269Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_29f2a913f372d7bb9ae221a9cd7bc7fd60cadb5c1429936be735b9243193f670.png",
+      "sha256": "c8ac53729c46dd42f50cc56fdd007c14154fc1cacbce95fcdfbaa3fb37d8c302"
+    },
+    {
+      "evidence_id": "ev_3be9181aa8c8176803f75a2896edd743b9aab0a8e0cbf6f5bef905add439118a",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:43:35.214Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 515,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 749,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 348,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 12,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_3e348a1a19e11ac8c35cc1ec657e08eebab56f8529653f5cbeb41cb91cbc6169",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:49:48.995Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_3e348a1a19e11ac8c35cc1ec657e08eebab56f8529653f5cbeb41cb91cbc6169.png",
+      "sha256": "b8ab7c0b6565540117ffe5976a060525c43f72cf83ffbe57e555985081ebf27c"
+    },
+    {
+      "evidence_id": "ev_424f75d0bcb08ba07014dea3ae3c8fce1bb332b6cf8c93e7d46ea99bee6cce5b",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:44:06.400Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 523,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 763,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 357,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 17,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_434477ac42d2eb8e33a58314616b7785c2830ea70c7ba5198765821671b6d840",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:42:50.344Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_434477ac42d2eb8e33a58314616b7785c2830ea70c7ba5198765821671b6d840.png",
+      "sha256": "811f393e8c06bee94339dbe123ec77725e9731bc6cffd7f326235ffc2fad3ed7"
+    },
+    {
+      "evidence_id": "ev_483a00caeae7f8cdad0dd2c6b0bf3b81c6f04777359e97d28b75a60088c5c012",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:48:47.445Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 474,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 685,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 36,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 362,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 25,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_586385dc5d02f59c44f0d278f7d18a5fdf29078c3bef0de3e08a0676f2e2c4ce",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:44:49.668Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "dom"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "frames"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 537,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 781,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 365,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 20,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          },
+          {
+            "count": 1,
+            "reason": "out_of_target_scope",
+            "section": "workers"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "dom",
+          "frames",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes",
+          "workers"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_63736f11ac881d618fb9450afbcff2a8ebc86c44262ed1797ae31a1b0341fc33",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:46:50.711Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 6,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "dom"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "frames"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 525,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 1,
+            "reason": "disallowed_origin",
+            "section": "network_initiators"
+          },
+          {
+            "count": 6,
+            "reason": "disallowed_origin",
+            "section": "network_requests"
+          },
+          {
+            "count": 837,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 409,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 25,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          },
+          {
+            "count": 1,
+            "reason": "out_of_target_scope",
+            "section": "workers"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "dom",
+          "frames",
+          "json_body_shapes",
+          "metadata",
+          "network_initiators",
+          "network_requests",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes",
+          "workers"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_6453171d1dff3166411add4b6eb52c718eaa4fd88f0662b49f637c031811f871",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:47:10.766Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_6453171d1dff3166411add4b6eb52c718eaa4fd88f0662b49f637c031811f871.png",
+      "sha256": "8933c5a50e6ea77b6c1e081e077ce5f2d19fdf58a3b39e91255ba49066b5cb41"
+    },
+    {
+      "evidence_id": "ev_6930f2309067ae5d9168755ec60ff8a522d44582fcc71a8ce10cd0d7701886e4",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:42:30.678Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 3,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 515,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 710,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 13,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 347,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 15,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_6a915fd70ff9cbcde9353c699bc1402576b6a3fab94159a35fc8f704922bfbaf",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:45:38.224Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 6,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "dom"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "frames"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 535,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 786,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 368,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 23,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          },
+          {
+            "count": 1,
+            "reason": "out_of_target_scope",
+            "section": "workers"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "dom",
+          "frames",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes",
+          "workers"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_6b0246705de75f6ae8284366024f5521373702b0d9ac3d6d3dfe7ae249805312",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:46:26.891Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 6,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "dom"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "frames"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 513,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 786,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 368,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 26,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          },
+          {
+            "count": 1,
+            "reason": "out_of_target_scope",
+            "section": "workers"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "dom",
+          "frames",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes",
+          "workers"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_791e4c4f126249ba91481b65aa3f831174f27fc2968d6cb10d003e80fc573842",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:46:13.009Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_791e4c4f126249ba91481b65aa3f831174f27fc2968d6cb10d003e80fc573842.png",
+      "sha256": "bbe4982d63cca8c48ad2dcf1cca075093f7603652fbc776064e8d999fbb89c77"
+    },
+    {
+      "evidence_id": "ev_91ca45573729d67c20ed3ab6c63ad8139258f2e3eb08ea404abb6f00b8c66314",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:48:32.563Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 474,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 685,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 36,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 362,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 16,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_99075076c89360f0c75ddab7f660a01489cc75088c247a16c1bd00a16045194e",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:45:12.120Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 6,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "dom"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "frames"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 532,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 780,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 365,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 21,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          },
+          {
+            "count": 1,
+            "reason": "out_of_target_scope",
+            "section": "workers"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "dom",
+          "frames",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes",
+          "workers"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_9df7c32f5fd88f29370e54d5f5523c657b79582ba58a341450020cf5613e4fdf",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:50:14.437Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 486,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 706,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 36,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 371,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 13,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_a44d4beb56ab5b12916520b079266972edad8cd6b5f84140a7218339b53a825a",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:44:28.552Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 520,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 763,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 357,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 18,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_ac2de9efe22a38ec4f389658f7e22559aa0b43c8e34ae3bb2880feabbe745af6",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:43:39.762Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_ac2de9efe22a38ec4f389658f7e22559aa0b43c8e34ae3bb2880feabbe745af6.png",
+      "sha256": "ade2f165ab7bcaac5111d9849b489c0097c791b941c616b15ad4b268a6743034"
+    },
+    {
+      "evidence_id": "ev_ad233a9ad2a08b56cae087783fd1878d64bf5a9e2476493e9ed43ac074d74b1e",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:46:29.825Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_ad233a9ad2a08b56cae087783fd1878d64bf5a9e2476493e9ed43ac074d74b1e.png",
+      "sha256": "5681c0f364a1c551bf585312fd1f55f496b62d5d80af703ce1181b5273ff1ebf"
+    },
+    {
+      "evidence_id": "ev_af68d8931bc6a38cc1e94ac074438a228bb77e9c989ce1091845e45ea5673b08",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:46:05.964Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_af68d8931bc6a38cc1e94ac074438a228bb77e9c989ce1091845e45ea5673b08.png",
+      "sha256": "328ef7ce62c9a2e4784c586fd7c8f832dd05c9ff3962d5c230cc5cc0f93a4b11"
+    },
+    {
+      "evidence_id": "ev_b0799a6060e3a0512d3e89171e1d589526054b9cc1fd2e5f13455f274a752e9c",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:50:02.429Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_b0799a6060e3a0512d3e89171e1d589526054b9cc1fd2e5f13455f274a752e9c.png",
+      "sha256": "b236c89492534b34d42608a2eecbe373588ed16dba7f6b1e61ec32d9fbb6bde5"
+    },
+    {
+      "evidence_id": "ev_b4085a28377d808f9ea93ac35affe522f7f313ea6745302fd8ad892ca3522b76",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:41:41.870Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_b4085a28377d808f9ea93ac35affe522f7f313ea6745302fd8ad892ca3522b76.png",
+      "sha256": "5c0b4c427ef00a8e767596d91f2361362635bddd242fb92ebc8e69c29c612d42"
+    },
+    {
+      "evidence_id": "ev_bbe027d1373670943b55d7c3e55b3914ad5ee0f5a895a7f0fa3e8afdd3a99129",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:45:20.821Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 6,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "dom"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "frames"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 532,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 1,
+            "reason": "disallowed_origin",
+            "section": "network_requests"
+          },
+          {
+            "count": 780,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 365,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 22,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          },
+          {
+            "count": 1,
+            "reason": "out_of_target_scope",
+            "section": "workers"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "dom",
+          "frames",
+          "json_body_shapes",
+          "metadata",
+          "network_requests",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes",
+          "workers"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_c14454df851a861bfaaba2df25290d38fd3e1bdbc75a84712803caf42370b954",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:47:04.682Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_c14454df851a861bfaaba2df25290d38fd3e1bdbc75a84712803caf42370b954.png",
+      "sha256": "1f0895dd1b0af567f814bd6faead04612a03318dd0d725aff99a55f87b08a9e4"
+    },
+    {
+      "evidence_id": "ev_cf7798b082dada35d451bc34d16687c2973d2facb54c94eb5157d50d25292d55",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:49:43.427Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_cf7798b082dada35d451bc34d16687c2973d2facb54c94eb5157d50d25292d55.png",
+      "sha256": "16007034f57712aa32b139bf06e56d7d13e95fa6c81d5e2d7d7d0677f6140187"
+    },
+    {
+      "evidence_id": "ev_d473bdf862d84522e2c46b0e581b0383213263e424432af6a13668aa27c733d3",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:47:46.253Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 6,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "dom"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "frames"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 524,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 837,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 409,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 27,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          },
+          {
+            "count": 1,
+            "reason": "out_of_target_scope",
+            "section": "workers"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "dom",
+          "frames",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes",
+          "workers"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_d907a1e5e07519f1f0618c025a0b5ae1bee238e261c8218419410a137c6aa3ad",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:42:37.874Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_d907a1e5e07519f1f0618c025a0b5ae1bee238e261c8218419410a137c6aa3ad.png",
+      "sha256": "453e61393f010e70541608c335ae98e197410063f7c4950138bf745c0fb6270e"
+    },
+    {
+      "evidence_id": "ev_e2f96f3d585f5d1b87b2299c729e8dbeea6770f24b1d9a6a24a68ab1f3a33352",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:41:33.553Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 509,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 707,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 356,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 17,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_e38c64d1db234a9d6e78c32046f26b17c5615843ba5e173b6572b6939b4ce935",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:44:45.042Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 520,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 763,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 357,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 19,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_e90791a31c1c518eaccb9080d4b5f5545d346acd16616a04928a525f9ce2a7be",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:48:00.927Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 4,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 474,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 693,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 36,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 13,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 361,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 15,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 1,
+            "reason": "unsupported_url",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    },
+    {
+      "evidence_id": "ev_f23ce0ca57ccc45f884a8d540cad26dbe39318f8e3b24f6e2b5252dacfbc77ba",
+      "operation": "capture_web_screenshot",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:41:01.932Z",
+      "completeness": {
+        "attach_limited_sections": [],
+        "conditions": [
+          "complete_within_window"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [],
+        "policy_filtered_sections": [],
+        "status": "complete_within_window",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "The screenshot contains the visible viewport, including on-screen content.",
+        "REA does not scroll, evaluate JavaScript, or capture beyond the current viewport.",
+        "Browser host platform and architecture were not observed."
+      ],
+      "screenshot": "evidence/screenshots/ev_f23ce0ca57ccc45f884a8d540cad26dbe39318f8e3b24f6e2b5252dacfbc77ba.png",
+      "sha256": "44b7bf17fec3011ee8f767ab42e10439f974c1e6d152ae15677064f7936a269f"
+    },
+    {
+      "evidence_id": "ev_f37a2ae4194b9742b96237d335fff0b473a444b61142cbbbf0dde4eadf7edbd9",
+      "operation": "inspect_web_page",
+      "authority": "external-service",
+      "confidence": "observed",
+      "observed_at": "2026-10-11T23:43:17.247Z",
+      "completeness": {
+        "attach_limited_sections": [
+          "console_events",
+          "metadata",
+          "network_requests",
+          "websocket_connections",
+          "websocket_frames"
+        ],
+        "conditions": [
+          "attach_limited",
+          "policy_filtered"
+        ],
+        "dropped_events": {
+          "console_events": 0,
+          "network_requests": 0,
+          "scripts": 0,
+          "timeline_events": 0,
+          "total": 0,
+          "webmcp_tools": 0,
+          "websocket_connections": 0,
+          "websocket_frames": 0
+        },
+        "excluded": [
+          {
+            "count": 3,
+            "reason": "disallowed_origin",
+            "section": "console_events"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "console_text"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "json_body_shapes"
+          },
+          {
+            "count": 638,
+            "reason": "disallowed_origin",
+            "section": "metadata"
+          },
+          {
+            "count": 749,
+            "reason": "disallowed_origin",
+            "section": "resources"
+          },
+          {
+            "count": 37,
+            "reason": "unsupported_url",
+            "section": "resources"
+          },
+          {
+            "count": 1,
+            "reason": "not_approved",
+            "section": "script_sources"
+          },
+          {
+            "count": 348,
+            "reason": "disallowed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": 16,
+            "reason": "unattributed_origin",
+            "section": "scripts"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "storage_keys"
+          },
+          {
+            "count": null,
+            "reason": "not_approved",
+            "section": "websocket_shapes"
+          }
+        ],
+        "policy_filtered_sections": [
+          "console_events",
+          "console_text",
+          "json_body_shapes",
+          "metadata",
+          "resources",
+          "script_sources",
+          "scripts",
+          "storage_keys",
+          "websocket_shapes"
+        ],
+        "status": "policy_filtered",
+        "truncated_sections": [],
+        "unavailable_sections": []
+      },
+      "limitations": [
+        "Artifact identity is unavailable for this observation.",
+        "Observation starts when REA attaches; prior network and console activity is unavailable.",
+        "Raw network headers, bodies, cookies, storage values, console objects, and WebSocket payloads are never retained; explicitly requested primitive console text is retained verbatim, while payload captures retain value-free shapes.",
+        "Source maps are reported only as declarative URLs and are not fetched.",
+        "URL-less scripts and console events without an allowed source URL are excluded because their origin cannot be proven.",
+        "Browser host platform and architecture were not observed."
+      ]
+    }
+  ]
+}
